@@ -124,7 +124,7 @@ int main( void )
 			GPIOD_PSOR |= GPIO_PIN(BLUE_LED);
 
 		*/
-		uart_putstr( "Hello,_World!\r\n" );
+		uart_putstr( "Hello,_World!\r" );
 		//uart_putchar( uart_getchar() );
 	}
 

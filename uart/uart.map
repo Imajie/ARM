@@ -1,7 +1,7 @@
 Archive member included because of file (symbol)
 
 /usr/lib/gcc/arm-none-eabi/4.7.2/thumb/cortex-m0/libgcc.a(_udivsi3.o)
-                              src/circluar_buf.o (__aeabi_uidivmod)
+                              src/circular_buf.o (__aeabi_uidivmod)
 /usr/lib/gcc/arm-none-eabi/4.7.2/thumb/cortex-m0/libgcc.a(_divsi3.o)
                               src/uart.o (__aeabi_idiv)
 /usr/lib/gcc/arm-none-eabi/4.7.2/thumb/cortex-m0/libgcc.a(_dvmd_tls.o)
@@ -15,18 +15,6 @@ uart0_data          0x50              src/uart.o
 
 Discarded input sections
 
- .group         0x0000000000000000        0x8 src/circluar_buf.o
- .group         0x0000000000000000        0x8 src/circluar_buf.o
- .group         0x0000000000000000        0x8 src/circluar_buf.o
- .group         0x0000000000000000        0x8 src/circluar_buf.o
- .group         0x0000000000000000        0x8 src/circluar_buf.o
- .group         0x0000000000000000        0x8 src/circluar_buf.o
- .group         0x0000000000000000        0x8 src/circluar_buf.o
- .group         0x0000000000000000        0x8 src/circluar_buf.o
- .group         0x0000000000000000        0x8 src/circluar_buf.o
- .group         0x0000000000000000        0x8 src/circluar_buf.o
- .group         0x0000000000000000        0x8 src/circluar_buf.o
- .group         0x0000000000000000        0x8 src/circluar_buf.o
  .group         0x0000000000000000        0x8 src/uart.o
  .group         0x0000000000000000        0x8 src/uart.o
  .group         0x0000000000000000        0x8 src/uart.o
@@ -46,17 +34,29 @@ Discarded input sections
  .group         0x0000000000000000        0x8 src/uart.o
  .group         0x0000000000000000        0x8 src/uart.o
  .group         0x0000000000000000        0x8 src/uart.o
- .debug_macro   0x0000000000000000      0x7d2 src/uart.o
- .debug_macro   0x0000000000000000       0x2e src/uart.o
- .debug_macro   0x0000000000000000       0x2e src/uart.o
- .debug_macro   0x0000000000000000       0x94 src/uart.o
- .debug_macro   0x0000000000000000       0x10 src/uart.o
- .debug_macro   0x0000000000000000      0x100 src/uart.o
- .debug_macro   0x0000000000000000       0x3a src/uart.o
- .debug_macro   0x0000000000000000       0x52 src/uart.o
- .debug_macro   0x0000000000000000       0x19 src/uart.o
- .debug_macro   0x0000000000000000      0x16d src/uart.o
- .debug_macro   0x0000000000000000       0x16 src/uart.o
+ .group         0x0000000000000000        0x8 src/circular_buf.o
+ .group         0x0000000000000000        0x8 src/circular_buf.o
+ .group         0x0000000000000000        0x8 src/circular_buf.o
+ .group         0x0000000000000000        0x8 src/circular_buf.o
+ .group         0x0000000000000000        0x8 src/circular_buf.o
+ .group         0x0000000000000000        0x8 src/circular_buf.o
+ .group         0x0000000000000000        0x8 src/circular_buf.o
+ .group         0x0000000000000000        0x8 src/circular_buf.o
+ .group         0x0000000000000000        0x8 src/circular_buf.o
+ .group         0x0000000000000000        0x8 src/circular_buf.o
+ .group         0x0000000000000000        0x8 src/circular_buf.o
+ .group         0x0000000000000000        0x8 src/circular_buf.o
+ .debug_macro   0x0000000000000000      0x7d2 src/circular_buf.o
+ .debug_macro   0x0000000000000000       0x2e src/circular_buf.o
+ .debug_macro   0x0000000000000000       0x2e src/circular_buf.o
+ .debug_macro   0x0000000000000000       0x94 src/circular_buf.o
+ .debug_macro   0x0000000000000000       0x10 src/circular_buf.o
+ .debug_macro   0x0000000000000000      0x100 src/circular_buf.o
+ .debug_macro   0x0000000000000000       0x3a src/circular_buf.o
+ .debug_macro   0x0000000000000000       0x52 src/circular_buf.o
+ .debug_macro   0x0000000000000000       0x19 src/circular_buf.o
+ .debug_macro   0x0000000000000000      0x16d src/circular_buf.o
+ .debug_macro   0x0000000000000000       0x16 src/circular_buf.o
  .group         0x0000000000000000        0x8 src/main.o
  .group         0x0000000000000000        0x8 src/main.o
  .group         0x0000000000000000        0x8 src/main.o
@@ -108,8 +108,8 @@ m_data           0x0000000020000000 0x0000000000003000 rw
 
 Linker script and memory map
 
-LOAD src/circluar_buf.o
 LOAD src/uart.o
+LOAD src/circular_buf.o
 LOAD src/main.o
 LOAD startup/low_level_init.o
 LOAD startup/vectors.o
@@ -139,16 +139,16 @@ END GROUP
 .text           0x0000000000000410      0x6fc
                 0x0000000000000410                . = ALIGN (0x4)
  *(.text)
- .text          0x0000000000000410      0x10c src/circluar_buf.o
-                0x0000000000000410                c_buffer_init
-                0x000000000000045c                c_buffer_write
-                0x00000000000004c0                c_buffer_read
- .text          0x000000000000051c      0x21c src/uart.o
-                0x000000000000051c                uart_init
-                0x0000000000000600                uart_getchar
-                0x0000000000000630                uart_putchar
-                0x0000000000000680                uart_putstr
-                0x00000000000006ac                uart0_isr
+ .text          0x0000000000000410      0x21c src/uart.o
+                0x0000000000000410                uart_init
+                0x00000000000004f4                uart_getchar
+                0x0000000000000524                uart_putchar
+                0x0000000000000574                uart_putstr
+                0x00000000000005a0                uart0_isr
+ .text          0x000000000000062c      0x10c src/circular_buf.o
+                0x000000000000062c                c_buffer_init
+                0x0000000000000678                c_buffer_write
+                0x00000000000006dc                c_buffer_read
  .text          0x0000000000000738      0x1cc src/main.o
                 0x0000000000000738                init_gpio
                 0x00000000000007e4                init_PWM
@@ -192,10 +192,10 @@ END GROUP
  .v4_bx         0x0000000000000000        0x0 linker stubs
 
 .iplt           0x0000000000000b0c        0x0
- .iplt          0x0000000000000000        0x0 src/circluar_buf.o
+ .iplt          0x0000000000000000        0x0 src/uart.o
 
 .rel.dyn        0x0000000000000b0c        0x0
- .rel.iplt      0x0000000000000000        0x0 src/circluar_buf.o
+ .rel.iplt      0x0000000000000000        0x0 src/uart.o
 
 .ARM.extab
  *(.ARM.extab* .gnu.linkonce.armextab.*)
@@ -243,8 +243,8 @@ END GROUP
                 0x0000000020000000                . = ALIGN (0x4)
                 0x0000000020000000                _sdata = .
  *(.data)
- .data          0x0000000020000000        0x0 src/circluar_buf.o
  .data          0x0000000020000000        0x0 src/uart.o
+ .data          0x0000000020000000        0x0 src/circular_buf.o
  .data          0x0000000020000000        0x0 src/main.o
  .data          0x0000000020000000        0x0 startup/low_level_init.o
  .data          0x0000000020000000        0x0 startup/vectors.o
@@ -259,7 +259,7 @@ END GROUP
                 0x0000000000000b0c                ___m_data_1FFFF000_ROMStart = (___ROM_AT + SIZEOF (.data))
 
 .igot.plt       0x0000000020000000        0x0 load address 0x0000000000000b0c
- .igot.plt      0x0000000000000000        0x0 src/circluar_buf.o
+ .igot.plt      0x0000000000000000        0x0 src/uart.o
 
 .m_data_1FFFF000
                 0x000000001ffff000        0x0 load address 0x0000000000000b0c
@@ -275,8 +275,8 @@ END GROUP
                 0x0000000020000000                __START_BSS = .
                 0x0000000020000000                __bss_start__ = __START_BSS
  *(.bss)
- .bss           0x0000000020000000        0x0 src/circluar_buf.o
  .bss           0x0000000020000000        0x0 src/uart.o
+ .bss           0x0000000020000000        0x0 src/circular_buf.o
  .bss           0x0000000020000000        0x0 src/main.o
  .bss           0x0000000020000000        0x0 startup/low_level_init.o
  .bss           0x0000000020000000        0x0 startup/vectors.o
@@ -321,9 +321,9 @@ END GROUP
                 0x0000000000000000       0x31
  *(.ARM.attributes)
  .ARM.attributes
-                0x0000000000000000       0x31 src/circluar_buf.o
+                0x0000000000000000       0x31 src/uart.o
  .ARM.attributes
-                0x0000000000000031       0x31 src/uart.o
+                0x0000000000000031       0x31 src/circular_buf.o
  .ARM.attributes
                 0x0000000000000062       0x31 src/main.o
  .ARM.attributes
@@ -341,8 +341,8 @@ END GROUP
 OUTPUT(uart.elf elf32-littlearm)
 
 .debug_info     0x0000000000000000     0x16f2
- .debug_info    0x0000000000000000      0x1a6 src/circluar_buf.o
- .debug_info    0x00000000000001a6      0x7d1 src/uart.o
+ .debug_info    0x0000000000000000      0x7d1 src/uart.o
+ .debug_info    0x00000000000007d1      0x1a6 src/circular_buf.o
  .debug_info    0x0000000000000977      0x51f src/main.o
  .debug_info    0x0000000000000e96      0x3e7 startup/low_level_init.o
  .debug_info    0x000000000000127d      0x11f startup/vectors.o
@@ -352,8 +352,8 @@ OUTPUT(uart.elf elf32-littlearm)
  .debug_info    0x000000000000162b       0xc7 /usr/lib/gcc/arm-none-eabi/4.7.2/thumb/cortex-m0/libgcc.a(_dvmd_tls.o)
 
 .debug_abbrev   0x0000000000000000      0x5a4
- .debug_abbrev  0x0000000000000000       0xde src/circluar_buf.o
- .debug_abbrev  0x00000000000000de      0x17c src/uart.o
+ .debug_abbrev  0x0000000000000000      0x17c src/uart.o
+ .debug_abbrev  0x000000000000017c       0xde src/circular_buf.o
  .debug_abbrev  0x000000000000025a       0xfc src/main.o
  .debug_abbrev  0x0000000000000356       0xc6 startup/low_level_init.o
  .debug_abbrev  0x000000000000041c       0xb9 startup/vectors.o
@@ -363,8 +363,8 @@ OUTPUT(uart.elf elf32-littlearm)
  .debug_abbrev  0x0000000000000590       0x14 /usr/lib/gcc/arm-none-eabi/4.7.2/thumb/cortex-m0/libgcc.a(_dvmd_tls.o)
 
 .debug_loc      0x0000000000000000      0x30c
- .debug_loc     0x0000000000000000       0xa8 src/circluar_buf.o
- .debug_loc     0x00000000000000a8      0x118 src/uart.o
+ .debug_loc     0x0000000000000000      0x118 src/uart.o
+ .debug_loc     0x0000000000000118       0xa8 src/circular_buf.o
  .debug_loc     0x00000000000001c0       0x90 src/main.o
  .debug_loc     0x0000000000000250       0x2c startup/low_level_init.o
  .debug_loc     0x000000000000027c       0x2c startup/vectors.o
@@ -372,9 +372,9 @@ OUTPUT(uart.elf elf32-littlearm)
 
 .debug_aranges  0x0000000000000000      0x120
  .debug_aranges
-                0x0000000000000000       0x20 src/circluar_buf.o
+                0x0000000000000000       0x20 src/uart.o
  .debug_aranges
-                0x0000000000000020       0x20 src/uart.o
+                0x0000000000000020       0x20 src/circular_buf.o
  .debug_aranges
                 0x0000000000000040       0x20 src/main.o
  .debug_aranges
@@ -391,28 +391,28 @@ OUTPUT(uart.elf elf32-littlearm)
                 0x0000000000000100       0x20 /usr/lib/gcc/arm-none-eabi/4.7.2/thumb/cortex-m0/libgcc.a(_dvmd_tls.o)
 
 .debug_macro    0x0000000000000000     0xc865
- .debug_macro   0x0000000000000000       0xd2 src/circluar_buf.o
- .debug_macro   0x00000000000000d2      0x7d2 src/circluar_buf.o
- .debug_macro   0x00000000000008a4       0x2e src/circluar_buf.o
- .debug_macro   0x00000000000008d2       0x2e src/circluar_buf.o
- .debug_macro   0x0000000000000900       0x94 src/circluar_buf.o
- .debug_macro   0x0000000000000994       0x10 src/circluar_buf.o
- .debug_macro   0x00000000000009a4      0x100 src/circluar_buf.o
- .debug_macro   0x0000000000000aa4       0x3a src/circluar_buf.o
- .debug_macro   0x0000000000000ade       0x52 src/circluar_buf.o
- .debug_macro   0x0000000000000b30       0x19 src/circluar_buf.o
- .debug_macro   0x0000000000000b49      0x16d src/circluar_buf.o
- .debug_macro   0x0000000000000cb6       0x16 src/circluar_buf.o
- .debug_macro   0x0000000000000ccc       0x29 src/circluar_buf.o
- .debug_macro   0x0000000000000cf5      0x123 src/uart.o
- .debug_macro   0x0000000000000e18       0x10 src/uart.o
- .debug_macro   0x0000000000000e28       0x3a src/uart.o
- .debug_macro   0x0000000000000e62       0x4c src/uart.o
- .debug_macro   0x0000000000000eae       0x10 src/uart.o
- .debug_macro   0x0000000000000ebe      0x214 src/uart.o
- .debug_macro   0x00000000000010d2     0x5b02 src/uart.o
- .debug_macro   0x0000000000006bd4       0x16 src/uart.o
- .debug_macro   0x0000000000006bea       0x23 src/uart.o
+ .debug_macro   0x0000000000000000      0x123 src/uart.o
+ .debug_macro   0x0000000000000123      0x7d2 src/uart.o
+ .debug_macro   0x00000000000008f5       0x10 src/uart.o
+ .debug_macro   0x0000000000000905       0x3a src/uart.o
+ .debug_macro   0x000000000000093f       0x4c src/uart.o
+ .debug_macro   0x000000000000098b       0x10 src/uart.o
+ .debug_macro   0x000000000000099b      0x214 src/uart.o
+ .debug_macro   0x0000000000000baf     0x5b02 src/uart.o
+ .debug_macro   0x00000000000066b1       0x16 src/uart.o
+ .debug_macro   0x00000000000066c7       0x2e src/uart.o
+ .debug_macro   0x00000000000066f5       0x2e src/uart.o
+ .debug_macro   0x0000000000006723       0x94 src/uart.o
+ .debug_macro   0x00000000000067b7       0x10 src/uart.o
+ .debug_macro   0x00000000000067c7      0x100 src/uart.o
+ .debug_macro   0x00000000000068c7       0x3a src/uart.o
+ .debug_macro   0x0000000000006901       0x52 src/uart.o
+ .debug_macro   0x0000000000006953       0x19 src/uart.o
+ .debug_macro   0x000000000000696c      0x16d src/uart.o
+ .debug_macro   0x0000000000006ad9       0x16 src/uart.o
+ .debug_macro   0x0000000000006aef       0x23 src/uart.o
+ .debug_macro   0x0000000000006b12       0xd2 src/circular_buf.o
+ .debug_macro   0x0000000000006be4       0x29 src/circular_buf.o
  .debug_macro   0x0000000000006c0d       0x98 src/main.o
  .debug_macro   0x0000000000006ca5       0x48 startup/low_level_init.o
  .debug_macro   0x0000000000006ced     0x5b0e startup/low_level_init.o
@@ -421,8 +421,8 @@ OUTPUT(uart.elf elf32-littlearm)
  .debug_macro   0x000000000000c838       0x2d startup/startup.o
 
 .debug_line     0x0000000000000000      0xa32
- .debug_line    0x0000000000000000      0x223 src/circluar_buf.o
- .debug_line    0x0000000000000223      0x292 src/uart.o
+ .debug_line    0x0000000000000000      0x292 src/uart.o
+ .debug_line    0x0000000000000292      0x223 src/circular_buf.o
  .debug_line    0x00000000000004b5      0x154 src/main.o
  .debug_line    0x0000000000000609      0x10c startup/low_level_init.o
  .debug_line    0x0000000000000715       0xd8 startup/vectors.o
@@ -432,10 +432,10 @@ OUTPUT(uart.elf elf32-littlearm)
  .debug_line    0x00000000000009d5       0x5d /usr/lib/gcc/arm-none-eabi/4.7.2/thumb/cortex-m0/libgcc.a(_dvmd_tls.o)
 
 .debug_str      0x0000000000000000    0x230ae
- .debug_str     0x0000000000000000     0x3d3e src/circluar_buf.o
-                                       0x3e2b (size before relaxing)
- .debug_str     0x0000000000003d3e    0x1f139 src/uart.o
+ .debug_str     0x0000000000000000    0x22e22 src/uart.o
                                       0x2325b (size before relaxing)
+ .debug_str     0x0000000000022e22       0x55 src/circular_buf.o
+                                       0x3e2b (size before relaxing)
  .debug_str     0x0000000000022e77      0x11a src/main.o
                                       0x21430 (size before relaxing)
  .debug_str     0x0000000000022f91       0x4d startup/low_level_init.o
@@ -446,17 +446,17 @@ OUTPUT(uart.elf elf32-littlearm)
                                        0x2a04 (size before relaxing)
 
 .comment        0x0000000000000000       0x11
- .comment       0x0000000000000000       0x11 src/circluar_buf.o
+ .comment       0x0000000000000000       0x11 src/uart.o
                                          0x12 (size before relaxing)
- .comment       0x0000000000000000       0x12 src/uart.o
+ .comment       0x0000000000000000       0x12 src/circular_buf.o
  .comment       0x0000000000000000       0x12 src/main.o
  .comment       0x0000000000000000       0x12 startup/low_level_init.o
  .comment       0x0000000000000000       0x12 startup/vectors.o
  .comment       0x0000000000000000       0x12 startup/startup.o
 
 .debug_frame    0x0000000000000000      0x26c
- .debug_frame   0x0000000000000000       0x70 src/circluar_buf.o
- .debug_frame   0x0000000000000070       0xb0 src/uart.o
+ .debug_frame   0x0000000000000000       0xb0 src/uart.o
+ .debug_frame   0x00000000000000b0       0x70 src/circular_buf.o
  .debug_frame   0x0000000000000120       0x68 src/main.o
  .debug_frame   0x0000000000000188       0x2c startup/low_level_init.o
  .debug_frame   0x00000000000001b4       0x2c startup/vectors.o

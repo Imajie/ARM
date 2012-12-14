@@ -81,7 +81,7 @@ void uart_putchar( const char c )
 	while( c_buffer_write( &uart0_c_buf, c ) != 0 );
 
 	// is the TX idle
-	if( UART0_S1 & UART_S1_TDRE_MASK )
+	if( UART0_S1 & UART_S1_TC_MASK )
 	{
 		UART0_C2 |= UART_C2_TIE_MASK;
 	}

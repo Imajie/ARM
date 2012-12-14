@@ -1,4 +1,6 @@
 *.o
+*.d
+*.map
 *.elf
 *.hex
 */Debug/
