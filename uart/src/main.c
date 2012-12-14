@@ -1,12 +1,11 @@
 #include "common.h"
+#include "uart.h"
 
 #define RED_LED		(18)
 #define GREEN_LED	(19)
 #define BLUE_LED	(1)
 
 #define GPIO_PIN(x)	(1<<(x))
-
-int SOME_DATA[10];
 
 void init_gpio( void )
 {
@@ -21,12 +20,12 @@ void init_gpio( void )
 
 	// init green LED
 	PORTB_PCR19 = PORT_PCR_MUX(1);		// Set PTB19 pin mux to GPIO
-	GPIOB_PCOR |= GPIO_PIN(GREEN_LED);	// Set green LED to high initially
+	GPIOB_PSOR |= GPIO_PIN(GREEN_LED);	// Set green LED to high initially
 	GPIOB_PDDR |= GPIO_PIN(GREEN_LED);	// Set green LED pin to output
 
 	// init blue LED
 	PORTD_PCR1 = PORT_PCR_MUX(1);		// Set PTD1 pin mux to GPIO
-	GPIOD_PCOR |= GPIO_PIN(BLUE_LED);	// Set blue LED to high initially
+	GPIOD_PSOR |= GPIO_PIN(BLUE_LED);	// Set blue LED to high initially
 	GPIOD_PDDR |= GPIO_PIN(BLUE_LED);	// Set blue LED pin to output
 
 }
@@ -90,9 +89,18 @@ int main( void )
 	for( i = 0; i < DELAY; i++ );
 
 	init_PWM();
+	uart_init(9600);
 
+	SIM_SCGC5 |= SIM_SCGC5_PORTA_MASK;
+	
+	PORTA_PCR1 = PORT_PCR_MUX(2);		// Set PTA1 to UART0_RX
+	PORTA_PCR2 = PORT_PCR_MUX(2);		// Set PTA2 to UART0_TX
+
+	__enable_interrupts();
+	
 	while( 1 )
 	{
+		/*
 		j++;
 		j = j % (1<<3);
 
@@ -115,9 +123,10 @@ int main( void )
 		else
 			GPIOD_PSOR |= GPIO_PIN(BLUE_LED);
 
+		*/
+		uart_putstr( "Hello,_World!\r\n" );
+		//uart_putchar( uart_getchar() );
 	}
-
-	SOME_DATA[0] = 1;
 
 	return 0;
 }

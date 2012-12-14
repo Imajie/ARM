@@ -26,6 +26,17 @@
 //#include "MKL25Z128LK4.h"
 #include "MKL25Z4.h"
 
+#define NVIC_IntEnable(x)	(NVIC_ISER |= 1<<((x)-16))
+
+#define __enable_interrupts()	\
+	do{	\
+		asm("CPSIE i");	\
+	}while(0)
+
+#define __disable_interrupts()	\
+	do{	\
+		asm("CPSID i");	\
+	}while(0)
 
 /********************************************************************/
 

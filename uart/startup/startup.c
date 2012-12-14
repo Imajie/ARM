@@ -13,7 +13,7 @@ void zero_bss()
 	extern int32_t __bss_end__;
 	char *ptr;
 
-	for( ptr = (char*)__bss_start__; ptr <= (char*)__bss_end__; ptr++ )
+	for( ptr = (char*)__bss_start__; ptr < (char*)__bss_end__; ptr++ )
 	{
 		*ptr = 0;
 	}
@@ -25,7 +25,7 @@ ISR(_start)
 	low_level_init();
 
 	/* zero BSS */
-	zero_bss();
+	//zero_bss();
 
 	/* call main */
 	main();
