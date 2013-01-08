@@ -35,6 +35,20 @@ char uart_getchar();
  */
 void uart_putchar( const char c );
 
+/*
+ * uart_putstr
+ * 	s:		The string to print
+ *
+ * 	Print the string over uart
+ */
 void uart_putstr( const char *s );
 
+/*
+ * uart_putnum
+ * 	x:		The number to display
+ * 	digits:	The number of digits in number
+ *
+ * 	Print number with "digit" digits over uart
+ */
+void uart_putnum( uint32_t x, uint8_t digits );
 #endif

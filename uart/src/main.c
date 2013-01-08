@@ -1,5 +1,6 @@
 #include "common.h"
 #include "uart.h"
+#include "tss.h"
 
 #define RED_LED		(18)
 #define GREEN_LED	(19)
@@ -66,7 +67,7 @@ void init_PWM(void)
 	PORTC_PCR1 = PORT_PCR_MUX(4);		// Set PTC1 to TPM0_CH0
 }
 
-#define DELAY 5000000
+#define DELAY 5000
 
 #define NONE	(0)
 #define RED		(1<<0)
@@ -78,55 +79,34 @@ void init_PWM(void)
 int main( void )
 {
 	int i;
-	int j = 0;
 
-	// some delay
-	for( i = 0; i < DELAY; i++ );
-
-	init_gpio();
-
-	// some delay
-	for( i = 0; i < DELAY; i++ );
-
-	init_PWM();
 	uart_init(9600);
 
-	SIM_SCGC5 |= SIM_SCGC5_PORTA_MASK;
-	
-	PORTA_PCR1 = PORT_PCR_MUX(2);		// Set PTA1 to UART0_RX
-	PORTA_PCR2 = PORT_PCR_MUX(2);		// Set PTA2 to UART0_TX
+	init_gpio();
+	init_PWM();
+	tss_init();
 
 	__enable_interrupts();
-	
+	for( i=0; i<DELAY; i++) ;
+
+	uart_putstr( "Initialization Complete\r\n" );
+
+	// wait for user to press a key
+	uart_putstr( "Press any key:" );
+	uart_getchar();
+
+	TSI0_DATA |= TSI_DATA_SWTS_MASK;
+
 	while( 1 )
-	{
-		/*
-		j++;
-		j = j % (1<<3);
+	{	
+		uart_putnum( tss_pin9, 5 );		// 2^16 = 65536 = 5 digits
+		uart_putstr( "\t" );
+		uart_putnum( tss_pin10, 5 );	// 2^16 = 65536 = 5 digits
+		uart_putstr( "\r\n" );
 
-		// some delay
-		for( i = 0; i < DELAY; i++ );
-		
-		// turn on next pattern
-		if( IS_SET(j,RED) )
-			GPIOB_PCOR |= GPIO_PIN(RED_LED);
-		else
-			GPIOB_PSOR |= GPIO_PIN(RED_LED);
-
-		if( IS_SET(j,GREEN) )
-			GPIOB_PCOR |= GPIO_PIN(GREEN_LED);
-		else
-			GPIOB_PSOR |= GPIO_PIN(GREEN_LED);
-
-		if( IS_SET(j,BLUE) )
-			GPIOD_PCOR |= GPIO_PIN(BLUE_LED);
-		else
-			GPIOD_PSOR |= GPIO_PIN(BLUE_LED);
-
-		*/
-		uart_putstr( "Hello,_World!\r" );
-		//uart_putchar( uart_getchar() );
+		for( i=0; i<DELAY; i++);
 	}
+	
 
 	return 0;
 }

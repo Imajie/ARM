@@ -1,7 +1,7 @@
 Archive member included because of file (symbol)
 
 /usr/lib/gcc/arm-none-eabi/4.7.2/thumb/cortex-m0/libgcc.a(_udivsi3.o)
-                              src/circular_buf.o (__aeabi_uidivmod)
+                              src/uart.o (__aeabi_uidiv)
 /usr/lib/gcc/arm-none-eabi/4.7.2/thumb/cortex-m0/libgcc.a(_divsi3.o)
                               src/uart.o (__aeabi_idiv)
 /usr/lib/gcc/arm-none-eabi/4.7.2/thumb/cortex-m0/libgcc.a(_dvmd_tls.o)
@@ -10,8 +10,13 @@ Archive member included because of file (symbol)
 Allocating common symbols
 Common symbol       size              file
 
-uart0_c_buf         0x14              src/uart.o
-uart0_data          0x50              src/uart.o
+tss_pin10           0x2               src/tss.o
+uart0_c_buf_tx      0x14              src/uart.o
+uart0_c_buf_rx      0x14              src/uart.o
+tss_pin9            0x2               src/tss.o
+uart0_data_rx       0x50              src/uart.o
+uart0_data_tx       0x50              src/uart.o
+tss_cur_pin         0x1               src/tss.o
 
 Discarded input sections
 
@@ -73,6 +78,23 @@ Discarded input sections
  .debug_macro   0x0000000000000000      0x214 src/main.o
  .debug_macro   0x0000000000000000     0x5b02 src/main.o
  .debug_macro   0x0000000000000000       0x16 src/main.o
+ .group         0x0000000000000000        0x8 src/tss.o
+ .group         0x0000000000000000        0x8 src/tss.o
+ .group         0x0000000000000000        0x8 src/tss.o
+ .group         0x0000000000000000        0x8 src/tss.o
+ .group         0x0000000000000000        0x8 src/tss.o
+ .group         0x0000000000000000        0x8 src/tss.o
+ .group         0x0000000000000000        0x8 src/tss.o
+ .group         0x0000000000000000        0x8 src/tss.o
+ .debug_macro   0x0000000000000000      0x7d2 src/tss.o
+ .debug_macro   0x0000000000000000       0x10 src/tss.o
+ .debug_macro   0x0000000000000000       0x3a src/tss.o
+ .debug_macro   0x0000000000000000       0x4c src/tss.o
+ .debug_macro   0x0000000000000000       0x10 src/tss.o
+ .debug_macro   0x0000000000000000      0x214 src/tss.o
+ .debug_macro   0x0000000000000000     0x5b02 src/tss.o
+ .debug_macro   0x0000000000000000       0x16 src/tss.o
+ .group         0x0000000000000000        0x8 startup/low_level_init.o
  .group         0x0000000000000000        0x8 startup/low_level_init.o
  .group         0x0000000000000000        0x8 startup/low_level_init.o
  .group         0x0000000000000000        0x8 startup/low_level_init.o
@@ -84,11 +106,22 @@ Discarded input sections
  .debug_macro   0x0000000000000000       0x10 startup/low_level_init.o
  .debug_macro   0x0000000000000000       0x3a startup/low_level_init.o
  .debug_macro   0x0000000000000000       0x4c startup/low_level_init.o
+ .debug_macro   0x0000000000000000       0x16 startup/low_level_init.o
+ .group         0x0000000000000000        0x8 startup/vectors.o
+ .group         0x0000000000000000        0x8 startup/vectors.o
+ .group         0x0000000000000000        0x8 startup/vectors.o
+ .group         0x0000000000000000        0x8 startup/vectors.o
+ .group         0x0000000000000000        0x8 startup/vectors.o
  .group         0x0000000000000000        0x8 startup/vectors.o
  .group         0x0000000000000000        0x8 startup/vectors.o
  .group         0x0000000000000000        0x8 startup/vectors.o
  .debug_macro   0x0000000000000000      0x7d2 startup/vectors.o
  .debug_macro   0x0000000000000000      0x214 startup/vectors.o
+ .debug_macro   0x0000000000000000       0x10 startup/vectors.o
+ .debug_macro   0x0000000000000000       0x3a startup/vectors.o
+ .debug_macro   0x0000000000000000       0x4c startup/vectors.o
+ .debug_macro   0x0000000000000000     0x5b0e startup/vectors.o
+ .debug_macro   0x0000000000000000       0x16 startup/vectors.o
  .group         0x0000000000000000        0x8 startup/startup.o
  .group         0x0000000000000000        0x8 startup/startup.o
  .group         0x0000000000000000        0x8 startup/startup.o
@@ -111,6 +144,7 @@ Linker script and memory map
 LOAD src/uart.o
 LOAD src/circular_buf.o
 LOAD src/main.o
+LOAD src/tss.o
 LOAD startup/low_level_init.o
 LOAD startup/vectors.o
 LOAD startup/startup.o
@@ -136,44 +170,80 @@ END GROUP
  *(.cfmconfig)
                 0x0000000000000400                . = ALIGN (0x4)
 
-.text           0x0000000000000410      0x6fc
+.text           0x0000000000000410      0x8fc
                 0x0000000000000410                . = ALIGN (0x4)
  *(.text)
- .text          0x0000000000000410      0x21c src/uart.o
+ .text          0x0000000000000410      0x2a4 src/uart.o
                 0x0000000000000410                uart_init
-                0x00000000000004f4                uart_getchar
-                0x0000000000000524                uart_putchar
-                0x0000000000000574                uart_putstr
-                0x00000000000005a0                uart0_isr
- .text          0x000000000000062c      0x10c src/circular_buf.o
-                0x000000000000062c                c_buffer_init
-                0x0000000000000678                c_buffer_write
-                0x00000000000006dc                c_buffer_read
- .text          0x0000000000000738      0x1cc src/main.o
-                0x0000000000000738                init_gpio
-                0x00000000000007e4                init_PWM
-                0x000000000000087c                main
- .text          0x0000000000000904       0x48 startup/low_level_init.o
-                0x0000000000000904                low_level_init
- .text          0x000000000000094c        0xc startup/vectors.o
-                0x000000000000094c                nop_isr
- .text          0x0000000000000958       0x44 startup/startup.o
-                0x0000000000000958                zero_bss
-                0x000000000000098c                _start
- .text          0x000000000000099c       0x9c /usr/lib/gcc/arm-none-eabi/4.7.2/thumb/cortex-m0/libgcc.a(_udivsi3.o)
-                0x000000000000099c                __udivsi3
-                0x000000000000099c                __aeabi_uidiv
-                0x0000000000000a24                __aeabi_uidivmod
- .text          0x0000000000000a38       0xc0 /usr/lib/gcc/arm-none-eabi/4.7.2/thumb/cortex-m0/libgcc.a(_divsi3.o)
-                0x0000000000000a38                __aeabi_idiv
-                0x0000000000000a38                __divsi3
-                0x0000000000000ae4                __aeabi_idivmod
- .text          0x0000000000000af8        0x4 /usr/lib/gcc/arm-none-eabi/4.7.2/thumb/cortex-m0/libgcc.a(_dvmd_tls.o)
-                0x0000000000000af8                __aeabi_ldiv0
-                0x0000000000000af8                __aeabi_idiv0
+                0x0000000000000538                uart_getchar
+                0x0000000000000568                uart_putchar
+                0x00000000000005b8                uart_putstr
+                0x00000000000005e4                uart_putnum
+                0x0000000000000640                UART0_isr
+ .text          0x00000000000006b4      0x10c src/circular_buf.o
+                0x00000000000006b4                c_buffer_init
+                0x0000000000000700                c_buffer_write
+                0x0000000000000764                c_buffer_read
+ .text          0x00000000000007c0      0x1f8 src/main.o
+                0x00000000000007c0                init_gpio
+                0x000000000000086c                init_PWM
+                0x0000000000000904                main
+ .text          0x00000000000009b8      0x118 src/tss.o
+                0x00000000000009b8                tss_init
+                0x0000000000000a44                TSI0_isr
+ .text          0x0000000000000ad0       0x48 startup/low_level_init.o
+                0x0000000000000ad0                low_level_init
+ .text          0x0000000000000b18       0x1c startup/vectors.o
+                0x0000000000000b18                default_isr
+                0x0000000000000b18                PendableSrvReq_isr
+                0x0000000000000b18                SysTick_isr
+                0x0000000000000b18                FTFA_isr
+                0x0000000000000b18                TPM0_isr
+                0x0000000000000b18                DMA0_isr
+                0x0000000000000b18                TPM2_isr
+                0x0000000000000b18                RTC_isr
+                0x0000000000000b18                SPI0_isr
+                0x0000000000000b18                LPTimer_isr
+                0x0000000000000b18                LVD_LVW_isr
+                0x0000000000000b18                ADC0_isr
+                0x0000000000000b18                TPM1_isr
+                0x0000000000000b18                DMA3_isr
+                0x0000000000000b18                I2C1_isr
+                0x0000000000000b18                DMA2_isr
+                0x0000000000000b18                USB0_isr
+                0x0000000000000b18                SPI1_isr
+                0x0000000000000b18                RTC_Seconds_isr
+                0x0000000000000b18                UART1_isr
+                0x0000000000000b18                DAC0_isr
+                0x0000000000000b18                PIT_isr
+                0x0000000000000b18                PortD_isr
+                0x0000000000000b18                NMI_isr
+                0x0000000000000b18                CMP0_isr
+                0x0000000000000b18                LLW_isr
+                0x0000000000000b18                I2C0_isr
+                0x0000000000000b18                PortA_isr
+                0x0000000000000b18                SVCall_isr
+                0x0000000000000b18                MCG_isr
+                0x0000000000000b18                HardFault_isr
+                0x0000000000000b18                UART2_isr
+                0x0000000000000b18                DMA1_isr
+ .text          0x0000000000000b34       0x44 startup/startup.o
+                0x0000000000000b34                zero_bss
+                0x0000000000000b68                _start
+ .text          0x0000000000000b78       0x9c /usr/lib/gcc/arm-none-eabi/4.7.2/thumb/cortex-m0/libgcc.a(_udivsi3.o)
+                0x0000000000000b78                __udivsi3
+                0x0000000000000b78                __aeabi_uidiv
+                0x0000000000000c00                __aeabi_uidivmod
+ .text          0x0000000000000c14       0xc0 /usr/lib/gcc/arm-none-eabi/4.7.2/thumb/cortex-m0/libgcc.a(_divsi3.o)
+                0x0000000000000c14                __aeabi_idiv
+                0x0000000000000c14                __divsi3
+                0x0000000000000cc0                __aeabi_idivmod
+ .text          0x0000000000000cd4        0x4 /usr/lib/gcc/arm-none-eabi/4.7.2/thumb/cortex-m0/libgcc.a(_dvmd_tls.o)
+                0x0000000000000cd4                __aeabi_ldiv0
+                0x0000000000000cd4                __aeabi_idiv0
  *(.text*)
  *(.rodata)
- .rodata        0x0000000000000afc       0x10 src/main.o
+ .rodata        0x0000000000000cd8       0x34 src/main.o
  *(.rodata*)
  *(.glue_7)
  .glue_7        0x0000000000000000        0x0 linker stubs
@@ -182,70 +252,71 @@ END GROUP
  *(.eh_frame)
  *(.init)
  *(.fini)
-                0x0000000000000b0c                . = ALIGN (0x4)
-                0x0000000000000b0c                _etext = .
+                0x0000000000000d0c                . = ALIGN (0x4)
+                0x0000000000000d0c                _etext = .
 
-.vfp11_veneer   0x0000000000000b0c        0x0
+.vfp11_veneer   0x0000000000000d0c        0x0
  .vfp11_veneer  0x0000000000000000        0x0 linker stubs
 
-.v4_bx          0x0000000000000b0c        0x0
+.v4_bx          0x0000000000000d0c        0x0
  .v4_bx         0x0000000000000000        0x0 linker stubs
 
-.iplt           0x0000000000000b0c        0x0
+.iplt           0x0000000000000d0c        0x0
  .iplt          0x0000000000000000        0x0 src/uart.o
 
-.rel.dyn        0x0000000000000b0c        0x0
+.rel.dyn        0x0000000000000d0c        0x0
  .rel.iplt      0x0000000000000000        0x0 src/uart.o
 
 .ARM.extab
  *(.ARM.extab* .gnu.linkonce.armextab.*)
 
-.ARM            0x0000000000000b0c        0x0
-                0x0000000000000b0c                __exidx_start = .
+.ARM            0x0000000000000d0c        0x0
+                0x0000000000000d0c                __exidx_start = .
  *(.ARM.exidx*)
-                0x0000000000000b0c                __exidx_end = .
+                0x0000000000000d0c                __exidx_end = .
 
-.ctors          0x0000000000000b0c        0x0
-                0x0000000000000b0c                __CTOR_LIST__ = .
+.ctors          0x0000000000000d0c        0x0
+                0x0000000000000d0c                __CTOR_LIST__ = .
  *crtbegin.o(.ctors)
  *(EXCLUDE_FILE(*crtend.o) .ctors)
  *(SORT(.ctors.*))
  *(.ctors)
-                0x0000000000000b0c                __CTOR_END__ = .
+                0x0000000000000d0c                __CTOR_END__ = .
 
-.dtors          0x0000000000000b0c        0x0
-                0x0000000000000b0c                __DTOR_LIST__ = .
+.dtors          0x0000000000000d0c        0x0
+                0x0000000000000d0c                __DTOR_LIST__ = .
  *crtbegin.o(.dtors)
  *(EXCLUDE_FILE(*crtend.o) .dtors)
  *(SORT(.dtors.*))
  *(.dtors)
-                0x0000000000000b0c                __DTOR_END__ = .
+                0x0000000000000d0c                __DTOR_END__ = .
 
-.preinit_array  0x0000000000000b0c        0x0
-                0x0000000000000b0c                PROVIDE (__preinit_array_start, .)
+.preinit_array  0x0000000000000d0c        0x0
+                0x0000000000000d0c                PROVIDE (__preinit_array_start, .)
  *(.preinit_array*)
-                0x0000000000000b0c                PROVIDE (__preinit_array_end, .)
+                0x0000000000000d0c                PROVIDE (__preinit_array_end, .)
 
-.init_array     0x0000000000000b0c        0x0
-                0x0000000000000b0c                PROVIDE (__init_array_start, .)
+.init_array     0x0000000000000d0c        0x0
+                0x0000000000000d0c                PROVIDE (__init_array_start, .)
  *(SORT(.init_array.*))
  *(.init_array*)
-                0x0000000000000b0c                PROVIDE (__init_array_end, .)
+                0x0000000000000d0c                PROVIDE (__init_array_end, .)
 
-.fini_array     0x0000000000000b0c        0x0
-                0x0000000000000b0c                PROVIDE (__fini_array_start, .)
+.fini_array     0x0000000000000d0c        0x0
+                0x0000000000000d0c                PROVIDE (__fini_array_start, .)
  *(SORT(.fini_array.*))
  *(.fini_array*)
-                0x0000000000000b0c                PROVIDE (__fini_array_end, .)
-                0x0000000000000b0c                ___ROM_AT = .
+                0x0000000000000d0c                PROVIDE (__fini_array_end, .)
+                0x0000000000000d0c                ___ROM_AT = .
 
-.data           0x0000000020000000        0x0 load address 0x0000000000000b0c
+.data           0x0000000020000000        0x0 load address 0x0000000000000d0c
                 0x0000000020000000                . = ALIGN (0x4)
                 0x0000000020000000                _sdata = .
  *(.data)
  .data          0x0000000020000000        0x0 src/uart.o
  .data          0x0000000020000000        0x0 src/circular_buf.o
  .data          0x0000000020000000        0x0 src/main.o
+ .data          0x0000000020000000        0x0 src/tss.o
  .data          0x0000000020000000        0x0 startup/low_level_init.o
  .data          0x0000000020000000        0x0 startup/vectors.o
  .data          0x0000000020000000        0x0 startup/startup.o
@@ -256,13 +327,13 @@ END GROUP
                 0x0000000020000000                . = ALIGN (0x4)
                 0x0000000020000000                _edata = .
                 0x0000000000000000                ___data_size = (_edata - _sdata)
-                0x0000000000000b0c                ___m_data_1FFFF000_ROMStart = (___ROM_AT + SIZEOF (.data))
+                0x0000000000000d0c                ___m_data_1FFFF000_ROMStart = (___ROM_AT + SIZEOF (.data))
 
-.igot.plt       0x0000000020000000        0x0 load address 0x0000000000000b0c
+.igot.plt       0x0000000020000000        0x0 load address 0x0000000000000d0c
  .igot.plt      0x0000000000000000        0x0 src/uart.o
 
 .m_data_1FFFF000
-                0x000000001ffff000        0x0 load address 0x0000000000000b0c
+                0x000000001ffff000        0x0 load address 0x0000000000000d0c
                 0x000000001ffff000                . = ALIGN (0x4)
                 0x000000001ffff000                ___m_data_1FFFF000_RAMStart = .
  *(.m_data_1FFFF000)
@@ -271,13 +342,14 @@ END GROUP
                 0x0000000000000000                ___m_data_1FFFF000_ROMSize = (___m_data_1FFFF000_RAMEnd - ___m_data_1FFFF000_RAMStart)
                 0x000000001ffff000                . = ALIGN (0x4)
 
-.bss            0x0000000020000000       0x64 load address 0x0000000000000b0c
+.bss            0x0000000020000000       0xd0 load address 0x0000000000000d0c
                 0x0000000020000000                __START_BSS = .
                 0x0000000020000000                __bss_start__ = __START_BSS
  *(.bss)
  .bss           0x0000000020000000        0x0 src/uart.o
  .bss           0x0000000020000000        0x0 src/circular_buf.o
  .bss           0x0000000020000000        0x0 src/main.o
+ .bss           0x0000000020000000        0x0 src/tss.o
  .bss           0x0000000020000000        0x0 startup/low_level_init.o
  .bss           0x0000000020000000        0x0 startup/vectors.o
  .bss           0x0000000020000000        0x0 startup/startup.o
@@ -286,31 +358,38 @@ END GROUP
  .bss           0x0000000020000000        0x0 /usr/lib/gcc/arm-none-eabi/4.7.2/thumb/cortex-m0/libgcc.a(_dvmd_tls.o)
  *(.bss*)
  *(COMMON)
- COMMON         0x0000000020000000       0x64 src/uart.o
-                0x0000000020000000                uart0_c_buf
-                0x0000000020000014                uart0_data
-                0x0000000020000064                . = ALIGN (0x4)
-                0x0000000020000064                __END_BSS = .
-                0x0000000020000064                __bss_end__ = __END_BSS
+ COMMON         0x0000000020000000       0xc8 src/uart.o
+                0x0000000020000000                uart0_c_buf_tx
+                0x0000000020000014                uart0_c_buf_rx
+                0x0000000020000028                uart0_data_rx
+                0x0000000020000078                uart0_data_tx
+ COMMON         0x00000000200000c8        0x5 src/tss.o
+                0x00000000200000c8                tss_pin10
+                0x00000000200000ca                tss_pin9
+                0x00000000200000cc                tss_cur_pin
+                0x00000000200000d0                . = ALIGN (0x4)
+ *fill*         0x00000000200000cd        0x3 
+                0x00000000200000d0                __END_BSS = .
+                0x00000000200000d0                __bss_end__ = __END_BSS
 
 ._user_heap_stack
-                0x0000000020000064      0x400 load address 0x0000000000000b70
-                0x0000000020000064                . = ALIGN (0x4)
-                0x0000000020000064                PROVIDE (end, .)
-                0x0000000020000064                PROVIDE (_end, .)
-                0x0000000020000064                __heap_addr = .
-                0x0000000020000064                . = (. + __heap_size)
-                0x0000000020000464                . = (. + __stack_size)
- *fill*         0x0000000020000064      0x400 
-                0x0000000020000464                . = ALIGN (0x4)
-                0x0000000000000b0c                _romp_at = ((___ROM_AT + SIZEOF (.data)) + SIZEOF (.m_data_1FFFF000))
+                0x00000000200000d0      0x400 load address 0x0000000000000ddc
+                0x00000000200000d0                . = ALIGN (0x4)
+                0x00000000200000d0                PROVIDE (end, .)
+                0x00000000200000d0                PROVIDE (_end, .)
+                0x00000000200000d0                __heap_addr = .
+                0x00000000200000d0                . = (. + __heap_size)
+                0x00000000200004d0                . = (. + __stack_size)
+ *fill*         0x00000000200000d0      0x400 
+                0x00000000200004d0                . = ALIGN (0x4)
+                0x0000000000000d0c                _romp_at = ((___ROM_AT + SIZEOF (.data)) + SIZEOF (.m_data_1FFFF000))
 
-.romp           0x000000001ffff000       0x24 load address 0x0000000000000b0c
-                0x0000000000000b0c                __S_romp = _romp_at
-                0x000000001ffff000        0x4 LONG 0xb0c ___ROM_AT
+.romp           0x000000001ffff000       0x24 load address 0x0000000000000d0c
+                0x0000000000000d0c                __S_romp = _romp_at
+                0x000000001ffff000        0x4 LONG 0xd0c ___ROM_AT
                 0x000000001ffff004        0x4 LONG 0x20000000 _sdata
                 0x000000001ffff008        0x4 LONG 0x0 ___data_size
-                0x000000001ffff00c        0x4 LONG 0xb0c ___m_data_1FFFF000_ROMStart
+                0x000000001ffff00c        0x4 LONG 0xd0c ___m_data_1FFFF000_ROMStart
                 0x000000001ffff010        0x4 LONG 0x1ffff000 ___m_data_1FFFF000_RAMStart
                 0x000000001ffff014        0x4 LONG 0x0 ___m_data_1FFFF000_ROMSize
                 0x000000001ffff018        0x4 LONG 0x0
@@ -327,50 +406,55 @@ END GROUP
  .ARM.attributes
                 0x0000000000000062       0x31 src/main.o
  .ARM.attributes
-                0x0000000000000093       0x31 startup/low_level_init.o
+                0x0000000000000093       0x31 src/tss.o
  .ARM.attributes
-                0x00000000000000c4       0x31 startup/vectors.o
+                0x00000000000000c4       0x31 startup/low_level_init.o
  .ARM.attributes
-                0x00000000000000f5       0x31 startup/startup.o
+                0x00000000000000f5       0x31 startup/vectors.o
  .ARM.attributes
-                0x0000000000000126       0x23 /usr/lib/gcc/arm-none-eabi/4.7.2/thumb/cortex-m0/libgcc.a(_udivsi3.o)
+                0x0000000000000126       0x31 startup/startup.o
  .ARM.attributes
-                0x0000000000000149       0x23 /usr/lib/gcc/arm-none-eabi/4.7.2/thumb/cortex-m0/libgcc.a(_divsi3.o)
+                0x0000000000000157       0x23 /usr/lib/gcc/arm-none-eabi/4.7.2/thumb/cortex-m0/libgcc.a(_udivsi3.o)
  .ARM.attributes
-                0x000000000000016c       0x23 /usr/lib/gcc/arm-none-eabi/4.7.2/thumb/cortex-m0/libgcc.a(_dvmd_tls.o)
+                0x000000000000017a       0x23 /usr/lib/gcc/arm-none-eabi/4.7.2/thumb/cortex-m0/libgcc.a(_divsi3.o)
+ .ARM.attributes
+                0x000000000000019d       0x23 /usr/lib/gcc/arm-none-eabi/4.7.2/thumb/cortex-m0/libgcc.a(_dvmd_tls.o)
 OUTPUT(uart.elf elf32-littlearm)
 
-.debug_info     0x0000000000000000     0x16f2
- .debug_info    0x0000000000000000      0x7d1 src/uart.o
- .debug_info    0x00000000000007d1      0x1a6 src/circular_buf.o
- .debug_info    0x0000000000000977      0x51f src/main.o
- .debug_info    0x0000000000000e96      0x3e7 startup/low_level_init.o
- .debug_info    0x000000000000127d      0x11f startup/vectors.o
- .debug_info    0x000000000000139c      0x101 startup/startup.o
- .debug_info    0x000000000000149d       0xc7 /usr/lib/gcc/arm-none-eabi/4.7.2/thumb/cortex-m0/libgcc.a(_udivsi3.o)
- .debug_info    0x0000000000001564       0xc7 /usr/lib/gcc/arm-none-eabi/4.7.2/thumb/cortex-m0/libgcc.a(_divsi3.o)
- .debug_info    0x000000000000162b       0xc7 /usr/lib/gcc/arm-none-eabi/4.7.2/thumb/cortex-m0/libgcc.a(_dvmd_tls.o)
+.debug_info     0x0000000000000000     0x1f01
+ .debug_info    0x0000000000000000      0x855 src/uart.o
+ .debug_info    0x0000000000000855      0x1a6 src/circular_buf.o
+ .debug_info    0x00000000000009fb      0x58e src/main.o
+ .debug_info    0x0000000000000f89      0x696 src/tss.o
+ .debug_info    0x000000000000161f      0x3e7 startup/low_level_init.o
+ .debug_info    0x0000000000001a06      0x1a5 startup/vectors.o
+ .debug_info    0x0000000000001bab      0x101 startup/startup.o
+ .debug_info    0x0000000000001cac       0xc7 /usr/lib/gcc/arm-none-eabi/4.7.2/thumb/cortex-m0/libgcc.a(_udivsi3.o)
+ .debug_info    0x0000000000001d73       0xc7 /usr/lib/gcc/arm-none-eabi/4.7.2/thumb/cortex-m0/libgcc.a(_divsi3.o)
+ .debug_info    0x0000000000001e3a       0xc7 /usr/lib/gcc/arm-none-eabi/4.7.2/thumb/cortex-m0/libgcc.a(_dvmd_tls.o)
 
-.debug_abbrev   0x0000000000000000      0x5a4
+.debug_abbrev   0x0000000000000000      0x6ec
  .debug_abbrev  0x0000000000000000      0x17c src/uart.o
  .debug_abbrev  0x000000000000017c       0xde src/circular_buf.o
- .debug_abbrev  0x000000000000025a       0xfc src/main.o
- .debug_abbrev  0x0000000000000356       0xc6 startup/low_level_init.o
- .debug_abbrev  0x000000000000041c       0xb9 startup/vectors.o
- .debug_abbrev  0x00000000000004d5       0x93 startup/startup.o
- .debug_abbrev  0x0000000000000568       0x14 /usr/lib/gcc/arm-none-eabi/4.7.2/thumb/cortex-m0/libgcc.a(_udivsi3.o)
- .debug_abbrev  0x000000000000057c       0x14 /usr/lib/gcc/arm-none-eabi/4.7.2/thumb/cortex-m0/libgcc.a(_divsi3.o)
- .debug_abbrev  0x0000000000000590       0x14 /usr/lib/gcc/arm-none-eabi/4.7.2/thumb/cortex-m0/libgcc.a(_dvmd_tls.o)
+ .debug_abbrev  0x000000000000025a      0x10f src/main.o
+ .debug_abbrev  0x0000000000000369      0x103 src/tss.o
+ .debug_abbrev  0x000000000000046c       0xc6 startup/low_level_init.o
+ .debug_abbrev  0x0000000000000532       0xeb startup/vectors.o
+ .debug_abbrev  0x000000000000061d       0x93 startup/startup.o
+ .debug_abbrev  0x00000000000006b0       0x14 /usr/lib/gcc/arm-none-eabi/4.7.2/thumb/cortex-m0/libgcc.a(_udivsi3.o)
+ .debug_abbrev  0x00000000000006c4       0x14 /usr/lib/gcc/arm-none-eabi/4.7.2/thumb/cortex-m0/libgcc.a(_divsi3.o)
+ .debug_abbrev  0x00000000000006d8       0x14 /usr/lib/gcc/arm-none-eabi/4.7.2/thumb/cortex-m0/libgcc.a(_dvmd_tls.o)
 
-.debug_loc      0x0000000000000000      0x30c
- .debug_loc     0x0000000000000000      0x118 src/uart.o
- .debug_loc     0x0000000000000118       0xa8 src/circular_buf.o
- .debug_loc     0x00000000000001c0       0x90 src/main.o
- .debug_loc     0x0000000000000250       0x2c startup/low_level_init.o
- .debug_loc     0x000000000000027c       0x2c startup/vectors.o
- .debug_loc     0x00000000000002a8       0x64 startup/startup.o
+.debug_loc      0x0000000000000000      0x39c
+ .debug_loc     0x0000000000000000      0x150 src/uart.o
+ .debug_loc     0x0000000000000150       0xa8 src/circular_buf.o
+ .debug_loc     0x00000000000001f8       0x90 src/main.o
+ .debug_loc     0x0000000000000288       0x58 src/tss.o
+ .debug_loc     0x00000000000002e0       0x2c startup/low_level_init.o
+ .debug_loc     0x000000000000030c       0x2c startup/vectors.o
+ .debug_loc     0x0000000000000338       0x64 startup/startup.o
 
-.debug_aranges  0x0000000000000000      0x120
+.debug_aranges  0x0000000000000000      0x140
  .debug_aranges
                 0x0000000000000000       0x20 src/uart.o
  .debug_aranges
@@ -378,19 +462,21 @@ OUTPUT(uart.elf elf32-littlearm)
  .debug_aranges
                 0x0000000000000040       0x20 src/main.o
  .debug_aranges
-                0x0000000000000060       0x20 startup/low_level_init.o
+                0x0000000000000060       0x20 src/tss.o
  .debug_aranges
-                0x0000000000000080       0x20 startup/vectors.o
+                0x0000000000000080       0x20 startup/low_level_init.o
  .debug_aranges
-                0x00000000000000a0       0x20 startup/startup.o
+                0x00000000000000a0       0x20 startup/vectors.o
  .debug_aranges
-                0x00000000000000c0       0x20 /usr/lib/gcc/arm-none-eabi/4.7.2/thumb/cortex-m0/libgcc.a(_udivsi3.o)
+                0x00000000000000c0       0x20 startup/startup.o
  .debug_aranges
-                0x00000000000000e0       0x20 /usr/lib/gcc/arm-none-eabi/4.7.2/thumb/cortex-m0/libgcc.a(_divsi3.o)
+                0x00000000000000e0       0x20 /usr/lib/gcc/arm-none-eabi/4.7.2/thumb/cortex-m0/libgcc.a(_udivsi3.o)
  .debug_aranges
-                0x0000000000000100       0x20 /usr/lib/gcc/arm-none-eabi/4.7.2/thumb/cortex-m0/libgcc.a(_dvmd_tls.o)
+                0x0000000000000100       0x20 /usr/lib/gcc/arm-none-eabi/4.7.2/thumb/cortex-m0/libgcc.a(_divsi3.o)
+ .debug_aranges
+                0x0000000000000120       0x20 /usr/lib/gcc/arm-none-eabi/4.7.2/thumb/cortex-m0/libgcc.a(_dvmd_tls.o)
 
-.debug_macro    0x0000000000000000     0xc865
+.debug_macro    0x0000000000000000     0xc903
  .debug_macro   0x0000000000000000      0x123 src/uart.o
  .debug_macro   0x0000000000000123      0x7d2 src/uart.o
  .debug_macro   0x00000000000008f5       0x10 src/uart.o
@@ -413,36 +499,40 @@ OUTPUT(uart.elf elf32-littlearm)
  .debug_macro   0x0000000000006aef       0x23 src/uart.o
  .debug_macro   0x0000000000006b12       0xd2 src/circular_buf.o
  .debug_macro   0x0000000000006be4       0x29 src/circular_buf.o
- .debug_macro   0x0000000000006c0d       0x98 src/main.o
- .debug_macro   0x0000000000006ca5       0x48 startup/low_level_init.o
- .debug_macro   0x0000000000006ced     0x5b0e startup/low_level_init.o
- .debug_macro   0x000000000000c7fb       0x2d startup/vectors.o
- .debug_macro   0x000000000000c828       0x10 startup/vectors.o
- .debug_macro   0x000000000000c838       0x2d startup/startup.o
+ .debug_macro   0x0000000000006c0d       0xa2 src/main.o
+ .debug_macro   0x0000000000006caf       0x66 src/tss.o
+ .debug_macro   0x0000000000006d15       0x4d startup/low_level_init.o
+ .debug_macro   0x0000000000006d62     0x5b0e startup/low_level_init.o
+ .debug_macro   0x000000000000c870       0x56 startup/vectors.o
+ .debug_macro   0x000000000000c8c6       0x10 startup/vectors.o
+ .debug_macro   0x000000000000c8d6       0x2d startup/startup.o
 
-.debug_line     0x0000000000000000      0xa32
- .debug_line    0x0000000000000000      0x292 src/uart.o
- .debug_line    0x0000000000000292      0x223 src/circular_buf.o
- .debug_line    0x00000000000004b5      0x154 src/main.o
- .debug_line    0x0000000000000609      0x10c startup/low_level_init.o
- .debug_line    0x0000000000000715       0xd8 startup/vectors.o
- .debug_line    0x00000000000007ed       0xf1 startup/startup.o
- .debug_line    0x00000000000008de       0x75 /usr/lib/gcc/arm-none-eabi/4.7.2/thumb/cortex-m0/libgcc.a(_udivsi3.o)
- .debug_line    0x0000000000000953       0x82 /usr/lib/gcc/arm-none-eabi/4.7.2/thumb/cortex-m0/libgcc.a(_divsi3.o)
- .debug_line    0x00000000000009d5       0x5d /usr/lib/gcc/arm-none-eabi/4.7.2/thumb/cortex-m0/libgcc.a(_dvmd_tls.o)
+.debug_line     0x0000000000000000      0xb96
+ .debug_line    0x0000000000000000      0x29b src/uart.o
+ .debug_line    0x000000000000029b      0x223 src/circular_buf.o
+ .debug_line    0x00000000000004be      0x157 src/main.o
+ .debug_line    0x0000000000000615      0x124 src/tss.o
+ .debug_line    0x0000000000000739      0x10c startup/low_level_init.o
+ .debug_line    0x0000000000000845      0x10c startup/vectors.o
+ .debug_line    0x0000000000000951       0xf1 startup/startup.o
+ .debug_line    0x0000000000000a42       0x75 /usr/lib/gcc/arm-none-eabi/4.7.2/thumb/cortex-m0/libgcc.a(_udivsi3.o)
+ .debug_line    0x0000000000000ab7       0x82 /usr/lib/gcc/arm-none-eabi/4.7.2/thumb/cortex-m0/libgcc.a(_divsi3.o)
+ .debug_line    0x0000000000000b39       0x5d /usr/lib/gcc/arm-none-eabi/4.7.2/thumb/cortex-m0/libgcc.a(_dvmd_tls.o)
 
-.debug_str      0x0000000000000000    0x230ae
- .debug_str     0x0000000000000000    0x22e22 src/uart.o
-                                      0x2325b (size before relaxing)
- .debug_str     0x0000000000022e22       0x55 src/circular_buf.o
+.debug_str      0x0000000000000000    0x23152
+ .debug_str     0x0000000000000000    0x22e4b src/uart.o
+                                      0x23284 (size before relaxing)
+ .debug_str     0x0000000000022e4b       0x55 src/circular_buf.o
                                        0x3e2b (size before relaxing)
- .debug_str     0x0000000000022e77      0x11a src/main.o
-                                      0x21430 (size before relaxing)
- .debug_str     0x0000000000022f91       0x4d startup/low_level_init.o
-                                      0x2128a (size before relaxing)
- .debug_str     0x0000000000022fde       0x94 startup/vectors.o
-                                       0x2a1d (size before relaxing)
- .debug_str     0x0000000000023072       0x3c startup/startup.o
+ .debug_str     0x0000000000022ea0      0x169 src/main.o
+                                      0x2147b (size before relaxing)
+ .debug_str     0x0000000000023009       0x28 src/tss.o
+                                      0x2161f (size before relaxing)
+ .debug_str     0x0000000000023031       0x4d startup/low_level_init.o
+                                      0x21320 (size before relaxing)
+ .debug_str     0x000000000002307e       0x98 startup/vectors.o
+                                      0x212b6 (size before relaxing)
+ .debug_str     0x0000000000023116       0x3c startup/startup.o
                                        0x2a04 (size before relaxing)
 
 .comment        0x0000000000000000       0x11
@@ -450,16 +540,18 @@ OUTPUT(uart.elf elf32-littlearm)
                                          0x12 (size before relaxing)
  .comment       0x0000000000000000       0x12 src/circular_buf.o
  .comment       0x0000000000000000       0x12 src/main.o
+ .comment       0x0000000000000000       0x12 src/tss.o
  .comment       0x0000000000000000       0x12 startup/low_level_init.o
  .comment       0x0000000000000000       0x12 startup/vectors.o
  .comment       0x0000000000000000       0x12 startup/startup.o
 
-.debug_frame    0x0000000000000000      0x26c
- .debug_frame   0x0000000000000000       0xb0 src/uart.o
- .debug_frame   0x00000000000000b0       0x70 src/circular_buf.o
- .debug_frame   0x0000000000000120       0x68 src/main.o
- .debug_frame   0x0000000000000188       0x2c startup/low_level_init.o
- .debug_frame   0x00000000000001b4       0x2c startup/vectors.o
- .debug_frame   0x00000000000001e0       0x4c startup/startup.o
- .debug_frame   0x000000000000022c       0x20 /usr/lib/gcc/arm-none-eabi/4.7.2/thumb/cortex-m0/libgcc.a(_udivsi3.o)
- .debug_frame   0x000000000000024c       0x20 /usr/lib/gcc/arm-none-eabi/4.7.2/thumb/cortex-m0/libgcc.a(_divsi3.o)
+.debug_frame    0x0000000000000000      0x2d4
+ .debug_frame   0x0000000000000000       0xd0 src/uart.o
+ .debug_frame   0x00000000000000d0       0x70 src/circular_buf.o
+ .debug_frame   0x0000000000000140       0x68 src/main.o
+ .debug_frame   0x00000000000001a8       0x48 src/tss.o
+ .debug_frame   0x00000000000001f0       0x2c startup/low_level_init.o
+ .debug_frame   0x000000000000021c       0x2c startup/vectors.o
+ .debug_frame   0x0000000000000248       0x4c startup/startup.o
+ .debug_frame   0x0000000000000294       0x20 /usr/lib/gcc/arm-none-eabi/4.7.2/thumb/cortex-m0/libgcc.a(_udivsi3.o)
+ .debug_frame   0x00000000000002b4       0x20 /usr/lib/gcc/arm-none-eabi/4.7.2/thumb/cortex-m0/libgcc.a(_divsi3.o)
