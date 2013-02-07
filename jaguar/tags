@@ -6,6 +6,8 @@
 !_TAG_PROGRAM_VERSION	5.8	//
 A1	include/MKL25Z4.h	/^  uint8_t A1;                                      \/**< I2C Address Register 1, offset: 0x0 *\/$/;"	m	struct:I2C_MemMap	access:public
 A2	include/MKL25Z4.h	/^  uint8_t A2;                                      \/**< I2C Address Register 2, offset: 0x9 *\/$/;"	m	struct:I2C_MemMap	access:public
+ACCEL_SENSOR	include/jaguar.h	/^	ACCEL_SENSOR		= 5,$/;"	e	enum:__anon13
+ACK	include/jaguar.h	/^	ACK						= 8$/;"	e	enum:__anon15
 ACTLR	include/MKL25Z4.h	/^  uint32_t ACTLR;                                  \/**< Auxiliary Control Register,, offset: 0x8 *\/$/;"	m	struct:SCB_MemMap	access:public
 ADC0_BASE_PTR	include/MKL25Z4.h	403;"	d
 ADC0_CFG1	include/MKL25Z4.h	421;"	d
@@ -37,6 +39,7 @@ ADC0_SC1A	include/MKL25Z4.h	419;"	d
 ADC0_SC1B	include/MKL25Z4.h	420;"	d
 ADC0_SC2	include/MKL25Z4.h	427;"	d
 ADC0_SC3	include/MKL25Z4.h	428;"	d
+ADC0_isr	startup/vectors.c	/^void ADC0_isr( void ) __attribute__ ((weak, alias("default_isr")));$/;"	p	file:	signature:( void )
 ADC_BASE_PTRS	include/MKL25Z4.h	405;"	d
 ADC_CFG1_ADICLK	include/MKL25Z4.h	266;"	d
 ADC_CFG1_ADICLK_MASK	include/MKL25Z4.h	264;"	d
@@ -228,13 +231,15 @@ BACKKEY7	include/MKL25Z4.h	/^  uint8_t BACKKEY7;                                
 BASE	include/MKL25Z4.h	/^  uint32_t BASE;                                   \/**< MTB Base Register, offset: 0xC *\/$/;"	m	struct:MTB_MemMap	access:public
 BDH	include/MKL25Z4.h	/^  uint8_t BDH;                                     \/**< UART Baud Rate Register High, offset: 0x0 *\/$/;"	m	struct:UART0_MemMap	access:public
 BDH	include/MKL25Z4.h	/^  uint8_t BDH;                                     \/**< UART Baud Rate Register: High, offset: 0x0 *\/$/;"	m	struct:UART_MemMap	access:public
+BDH	src/uart.c	75;"	d	file:
 BDL	include/MKL25Z4.h	/^  uint8_t BDL;                                     \/**< UART Baud Rate Register Low, offset: 0x1 *\/$/;"	m	struct:UART0_MemMap	access:public
 BDL	include/MKL25Z4.h	/^  uint8_t BDL;                                     \/**< UART Baud Rate Register: Low, offset: 0x1 *\/$/;"	m	struct:UART_MemMap	access:public
+BDL	src/uart.c	71;"	d	file:
 BDTPAGE1	include/MKL25Z4.h	/^  uint8_t BDTPAGE1;                                \/**< BDT Page Register 1, offset: 0x9C *\/$/;"	m	struct:USB_MemMap	access:public
 BDTPAGE2	include/MKL25Z4.h	/^  uint8_t BDTPAGE2;                                \/**< BDT Page Register 2, offset: 0xB0 *\/$/;"	m	struct:USB_MemMap	access:public
 BDTPAGE3	include/MKL25Z4.h	/^  uint8_t BDTPAGE3;                                \/**< BDT Page Register 3, offset: 0xB4 *\/$/;"	m	struct:USB_MemMap	access:public
-BLUE	src/main.c	73;"	d	file:
-BLUE_LED	src/main.c	5;"	d	file:
+BLUE	src/main.c	75;"	d	file:
+BLUE_LED	src/main.c	7;"	d	file:
 BP_BASE_PTR	include/MKL25Z4.h	538;"	d
 BP_BASE_PTRS	include/MKL25Z4.h	540;"	d
 BP_CID0	include/MKL25Z4.h	565;"	d
@@ -286,6 +291,10 @@ BP_PID6_REG	include/MKL25Z4.h	505;"	d
 BP_PID7	include/MKL25Z4.h	560;"	d
 BP_PID7_REG	include/MKL25Z4.h	506;"	d
 BR	include/MKL25Z4.h	/^  uint8_t BR;                                      \/**< SPI baud rate register, offset: 0x2 *\/$/;"	m	struct:SPI_MemMap	access:public
+BREAK_COAST	include/jaguar.h	/^	BREAK_COAST				= 3,$/;"	e	enum:__anon21
+BROADCAST	include/jaguar.h	/^	BROADCAST			= 0,$/;"	e	enum:__anon13
+BROADCAST	include/jaguar.h	/^	BROADCAST	= 0,$/;"	e	enum:__anon14
+BUS_VOLTAGE	include/jaguar.h	/^	BUS_VOLTAGE				= 1,$/;"	e	enum:__anon20
 C0	include/MKL25Z4.h	/^  uint8_t C0;                                      \/**< DAC Control Register, offset: 0x21 *\/$/;"	m	struct:DAC_MemMap	access:public
 C1	include/MKL25Z4.h	/^  uint8_t C1;                                      \/**< DAC Control Register 1, offset: 0x22 *\/$/;"	m	struct:DAC_MemMap	access:public
 C1	include/MKL25Z4.h	/^  uint8_t C1;                                      \/**< I2C Control Register 1, offset: 0x2 *\/$/;"	m	struct:I2C_MemMap	access:public
@@ -349,6 +358,7 @@ CMP0_DACCR	include/MKL25Z4.h	720;"	d
 CMP0_FPR	include/MKL25Z4.h	718;"	d
 CMP0_MUXCR	include/MKL25Z4.h	721;"	d
 CMP0_SCR	include/MKL25Z4.h	719;"	d
+CMP0_isr	startup/vectors.c	/^void CMP0_isr( void ) __attribute__ ((weak, alias("default_isr")));$/;"	p	file:	signature:( void )
 CMP_BASE_PTRS	include/MKL25Z4.h	702;"	d
 CMP_CR0_FILTER_CNT	include/MKL25Z4.h	640;"	d
 CMP_CR0_FILTER_CNT_MASK	include/MKL25Z4.h	638;"	d
@@ -428,13 +438,20 @@ COMPID	include/MKL25Z4.h	/^  uint32_t COMPID[4];                              \/
 COMPID	include/MKL25Z4.h	/^  uint32_t COMPID[4];                              \/**< Component ID Register, array offset: 0xFF0, array step: 0x4 *\/$/;"	m	struct:MTB_MemMap	access:public
 COMPID	include/MKL25Z4.h	/^  uint32_t COMPID[4];                              \/**< Component ID Register, array offset: 0xFF0, array step: 0x4 *\/$/;"	m	struct:ROM_MemMap	access:public
 CONF	include/MKL25Z4.h	/^  uint32_t CONF;                                   \/**< Configuration, offset: 0x84 *\/$/;"	m	struct:TPM_MemMap	access:public
+CONFIGURATION	include/jaguar.h	/^	CONFIGURATION			= 7,$/;"	e	enum:__anon15
+CONFIGURE_MESSAGE_0	include/jaguar.h	/^	CONFIGURE_MESSAGE_0		= 4,$/;"	e	enum:__anon22
+CONFIGURE_MESSAGE_1	include/jaguar.h	/^	CONFIGURE_MESSAGE_1		= 5,$/;"	e	enum:__anon22
+CONFIGURE_MESSAGE_2	include/jaguar.h	/^	CONFIGURE_MESSAGE_2		= 6,$/;"	e	enum:__anon22
+CONFIGURE_MESSAGE_3	include/jaguar.h	/^	CONFIGURE_MESSAGE_3		= 7,$/;"	e	enum:__anon22
 CONTROL	include/MKL25Z4.h	/^  uint8_t CONTROL;                                 \/**< USB OTG Control register, offset: 0x108 *\/$/;"	m	struct:USB_MemMap	access:public
 CONTROLS	include/MKL25Z4.h	/^  } CONTROLS[6];$/;"	m	struct:TPM_MemMap	typeref:struct:TPM_MemMap::__anon11	access:public
+CONTROL_MODE	include/jaguar.h	/^	CONTROL_MODE			= 9,$/;"	e	enum:__anon20
 COPC	include/MKL25Z4.h	/^  uint32_t COPC;                                   \/**< COP Control Register, offset: 0x1100 *\/$/;"	m	struct:SIM_MemMap	access:public
 CPO	include/MKL25Z4.h	/^  uint32_t CPO;                                    \/**< Compute Operation Control Register, offset: 0x40 *\/$/;"	m	struct:MCM_MemMap	access:public
 CPU	Makefile	/^CPU=cortex-m0$/;"	m
 CPUID	include/MKL25Z4.h	/^  uint32_t CPUID;                                  \/**< CPUID Base Register, offset: 0xD00 *\/$/;"	m	struct:SCB_MemMap	access:public
 CPU_MKL25Z128LK4	include/freedom.h	19;"	d
+CPU_UART	include/uart.h	10;"	d
 CR	include/MKL25Z4.h	/^  uint32_t CR;                                     \/**< RTC Control Register, offset: 0x10 *\/$/;"	m	struct:RTC_MemMap	access:public
 CR	include/MKL25Z4.h	/^  uint8_t CR;                                      \/**< OSC Control Register, offset: 0x0 *\/$/;"	m	struct:OSC_MemMap	access:public
 CR0	include/MKL25Z4.h	/^  uint8_t CR0;                                     \/**< CMP Control Register 0, offset: 0x0 *\/$/;"	m	struct:CMP_MemMap	access:public
@@ -446,6 +463,8 @@ CTL	include/MKL25Z4.h	/^  uint8_t CTL;                                     \/**<
 CTRL	include/MKL25Z4.h	/^  uint32_t CTRL;                                   \/**< Control Register, offset: 0x0 *\/$/;"	m	struct:DWT_MemMap	access:public
 CTRL	include/MKL25Z4.h	/^  uint32_t CTRL;                                   \/**< FlashPatch Control Register, offset: 0x0 *\/$/;"	m	struct:BP_MemMap	access:public
 CTRL	include/MKL25Z4.h	/^  uint32_t CTRL;                                   \/**< MTB DWT Control Register, offset: 0x0 *\/$/;"	m	struct:MTBDWT_MemMap	access:public
+CURRENT	include/jaguar.h	/^	CURRENT					= 2,$/;"	e	enum:__anon20
+CURRENT_CONTROL	include/jaguar.h	/^	CURRENT_CONTROL			= 4,$/;"	e	enum:__anon15
 CV1	include/MKL25Z4.h	/^  uint32_t CV1;                                    \/**< Compare Value Registers, offset: 0x18 *\/$/;"	m	struct:ADC_MemMap	access:public
 CV2	include/MKL25Z4.h	/^  uint32_t CV2;                                    \/**< Compare Value Registers, offset: 0x1C *\/$/;"	m	struct:ADC_MemMap	access:public
 CVAL	include/MKL25Z4.h	/^    uint32_t CVAL;                                   \/**< Current Timer Value Register, array offset: 0x104, array step: 0x10 *\/$/;"	m	struct:PIT_MemMap::__anon10	access:public
@@ -482,6 +501,7 @@ DAC0_DAT1L	include/MKL25Z4.h	944;"	d
 DAC0_DATH	include/MKL25Z4.h	953;"	d
 DAC0_DATL	include/MKL25Z4.h	952;"	d
 DAC0_SR	include/MKL25Z4.h	946;"	d
+DAC0_isr	startup/vectors.c	/^void DAC0_isr( void ) __attribute__ ((weak, alias("default_isr")));$/;"	p	file:	signature:( void )
 DACCR	include/MKL25Z4.h	/^  uint8_t DACCR;                                   \/**< DAC Control Register, offset: 0x4 *\/$/;"	m	struct:CMP_MemMap	access:public
 DAC_BASE_PTRS	include/MKL25Z4.h	928;"	d
 DAC_C0_DACBBIEN_MASK	include/MKL25Z4.h	892;"	d
@@ -543,18 +563,25 @@ DCR	include/MKL25Z4.h	/^    uint32_t DCR;                                    \/*
 DCRDR	include/MKL25Z4.h	811;"	d
 DCRSR	include/MKL25Z4.h	810;"	d
 DEBUG_PRINT	include/freedom.h	16;"	d
-DELAY	src/main.c	68;"	d	file:
+DEKA	include/jaguar.h	/^	DEKA		= 3$/;"	e	enum:__anon14
+DELAY	src/main.c	70;"	d	file:
 DEMCR	include/MKL25Z4.h	812;"	d
 DEVICEARCH	include/MKL25Z4.h	/^  uint32_t DEVICEARCH;                             \/**< Device Architecture Register, offset: 0xFBC *\/$/;"	m	struct:MTB_MemMap	access:public
 DEVICECFG	include/MKL25Z4.h	/^  uint32_t DEVICECFG;                              \/**< Device Configuration Register, offset: 0xFC8 *\/$/;"	m	struct:MTBDWT_MemMap	access:public
 DEVICECFG	include/MKL25Z4.h	/^  uint32_t DEVICECFG;                              \/**< Device Configuration Register, offset: 0xFC8 *\/$/;"	m	struct:MTB_MemMap	access:public
 DEVICETYPID	include/MKL25Z4.h	/^  uint32_t DEVICETYPID;                            \/**< Device Type Identifier Register, offset: 0xFCC *\/$/;"	m	struct:MTBDWT_MemMap	access:public
 DEVICETYPID	include/MKL25Z4.h	/^  uint32_t DEVICETYPID;                            \/**< Device Type Identifier Register, offset: 0xFCC *\/$/;"	m	struct:MTB_MemMap	access:public
+DEVICE_ASSIGNMENT	include/jaguar.h	/^	DEVICE_ASSIGNMENT	= 2,$/;"	e	enum:__anon16
+DEVICE_QUERY	include/jaguar.h	/^	DEVICE_QUERY		= 3,$/;"	e	enum:__anon16
 DFSR	include/MKL25Z4.h	/^  uint32_t DFSR;                                   \/**< Debug Fault Status Register, offset: 0xD30 *\/$/;"	m	struct:SCB_MemMap	access:public
 DHCSR_Read	include/MKL25Z4.h	808;"	d
 DHCSR_Write	include/MKL25Z4.h	809;"	d
 DIRS	Makefile	/^DIRS=src startup include$/;"	m
 DMA	include/MKL25Z4.h	/^  } DMA[4];$/;"	m	struct:DMA_MemMap	typeref:struct:DMA_MemMap::__anon5	access:public
+DMA0_isr	startup/vectors.c	/^void DMA0_isr( void ) __attribute__ ((weak, alias("default_isr")));$/;"	p	file:	signature:( void )
+DMA1_isr	startup/vectors.c	/^void DMA1_isr( void ) __attribute__ ((weak, alias("default_isr")));$/;"	p	file:	signature:( void )
+DMA2_isr	startup/vectors.c	/^void DMA2_isr( void ) __attribute__ ((weak, alias("default_isr")));$/;"	p	file:	signature:( void )
+DMA3_isr	startup/vectors.c	/^void DMA3_isr( void ) __attribute__ ((weak, alias("default_isr")));$/;"	p	file:	signature:( void )
 DMAMUX0_BASE_PTR	include/MKL25Z4.h	1220;"	d
 DMAMUX0_CHCFG	include/MKL25Z4.h	1242;"	d
 DMAMUX0_CHCFG0	include/MKL25Z4.h	1236;"	d
@@ -721,9 +748,15 @@ DWT_PCSR	include/MKL25Z4.h	1332;"	d
 DWT_PCSR_REG	include/MKL25Z4.h	1288;"	d
 DisableInterrupts	include/arm_cm0.h	33;"	d
 DisableInterrupts	include/arm_cm0.h	35;"	d
+ENABLE_MESSAGE_0	include/jaguar.h	/^	ENABLE_MESSAGE_0		= 0,$/;"	e	enum:__anon22
+ENABLE_MESSAGE_1	include/jaguar.h	/^	ENABLE_MESSAGE_1		= 1,$/;"	e	enum:__anon22
+ENABLE_MESSAGE_2	include/jaguar.h	/^	ENABLE_MESSAGE_2		= 2,$/;"	e	enum:__anon22
+ENABLE_MESSAGE_3	include/jaguar.h	/^	ENABLE_MESSAGE_3		= 3,$/;"	e	enum:__anon22
+ENCODER_PPR	include/jaguar.h	/^	ENCODER_PPR				= 1,$/;"	e	enum:__anon21
 ENDPOINT	include/MKL25Z4.h	/^  } ENDPOINT[16];$/;"	m	struct:USB_MemMap	typeref:struct:USB_MemMap::__anon12	access:public
 ENDPT	include/MKL25Z4.h	/^    uint8_t ENDPT;                                   \/**< Endpoint Control register, array offset: 0xC0, array step: 0x4 *\/$/;"	m	struct:USB_MemMap::__anon12	access:public
 ENTRY	include/MKL25Z4.h	/^  uint32_t ENTRY[3];                               \/**< Entry, array offset: 0x0, array step: 0x4 *\/$/;"	m	struct:ROM_MemMap	access:public
+ENUMERATION	include/jaguar.h	/^	ENUMERATION			= 9,$/;"	e	enum:__anon16
 ERREN	include/MKL25Z4.h	/^  uint8_t ERREN;                                   \/**< Error Interrupt Enable register, offset: 0x8C *\/$/;"	m	struct:USB_MemMap	access:public
 ERRSTAT	include/MKL25Z4.h	/^  uint8_t ERRSTAT;                                 \/**< Error Interrupt Status register, offset: 0x88 *\/$/;"	m	struct:USB_MemMap	access:public
 EnableInterrupts	include/arm_cm0.h	26;"	d
@@ -734,6 +767,9 @@ F2	include/MKL25Z4.h	/^  uint8_t F2;                                      \/**< 
 F3	include/MKL25Z4.h	/^  uint8_t F3;                                      \/**< LLWU Flag 3 register, offset: 0x7 *\/$/;"	m	struct:LLWU_MemMap	access:public
 FALSE	include/arm_cm0.h	44;"	d
 FALSE	include/arm_cm0.h	46;"	d
+FAULT	include/jaguar.h	/^	FAULT					= 7,$/;"	e	enum:__anon20
+FAULT_COUNT	include/jaguar.h	/^	FAULT_COUNT				= 12$/;"	e	enum:__anon20
+FAULT_TIME	include/jaguar.h	/^	FAULT_TIME				= 8$/;"	e	enum:__anon21
 FCCOB0	include/MKL25Z4.h	/^  uint8_t FCCOB0;                                  \/**< Flash Common Command Object Registers, offset: 0x7 *\/$/;"	m	struct:FTFA_MemMap	access:public
 FCCOB1	include/MKL25Z4.h	/^  uint8_t FCCOB1;                                  \/**< Flash Common Command Object Registers, offset: 0x6 *\/$/;"	m	struct:FTFA_MemMap	access:public
 FCCOB2	include/MKL25Z4.h	/^  uint8_t FCCOB2;                                  \/**< Flash Common Command Object Registers, offset: 0x5 *\/$/;"	m	struct:FTFA_MemMap	access:public
@@ -815,10 +851,14 @@ FGPIO_PTOR_PTTO_SHIFT	include/MKL25Z4.h	1420;"	d
 FGPIO_PTOR_REG	include/MKL25Z4.h	1388;"	d
 FILT1	include/MKL25Z4.h	/^  uint8_t FILT1;                                   \/**< LLWU Pin Filter 1 register, offset: 0x8 *\/$/;"	m	struct:LLWU_MemMap	access:public
 FILT2	include/MKL25Z4.h	/^  uint8_t FILT2;                                   \/**< LLWU Pin Filter 2 register, offset: 0x9 *\/$/;"	m	struct:LLWU_MemMap	access:public
+FIRMWARE_UPDATE	include/jaguar.h	/^	FIRMWARE_UPDATE		= 31$/;"	e	enum:__anon13
+FIRMWARE_UPDATE	include/jaguar.h	/^	FIRMWARE_UPDATE		= 7,$/;"	e	enum:__anon16
+FIRMWARE_VERSION	include/jaguar.h	/^	FIRMWARE_VERSION	= 8,$/;"	e	enum:__anon16
 FLOW	include/MKL25Z4.h	/^  uint32_t FLOW;                                   \/**< MTB Flow Register, offset: 0x8 *\/$/;"	m	struct:MTB_MemMap	access:public
 FLT	include/MKL25Z4.h	/^  uint8_t FLT;                                     \/**< I2C Programmable Input Glitch Filter register, offset: 0x6 *\/$/;"	m	struct:I2C_MemMap	access:public
 FOPT	include/MKL25Z4.h	/^  uint8_t FOPT;                                    \/**< Flash Option Register, offset: 0x3 *\/$/;"	m	struct:FTFA_MemMap	access:public
 FOPT	include/MKL25Z4.h	/^  uint8_t FOPT;                                    \/**< Non-volatile Flash Option Register, offset: 0xD *\/$/;"	m	struct:NV_MemMap	access:public
+FORWARD_DIRECTION_LIMIT	include/jaguar.h	/^	FORWARD_DIRECTION_LIMIT	= 5,$/;"	e	enum:__anon21
 FPR	include/MKL25Z4.h	/^  uint8_t FPR;                                     \/**< CMP Filter Period Register, offset: 0x2 *\/$/;"	m	struct:CMP_MemMap	access:public
 FPROT0	include/MKL25Z4.h	/^  uint8_t FPROT0;                                  \/**< Non-volatile P-Flash Protection 0 - High Register, offset: 0xB *\/$/;"	m	struct:NV_MemMap	access:public
 FPROT0	include/MKL25Z4.h	/^  uint8_t FPROT0;                                  \/**< Program Flash Protection Registers, offset: 0x13 *\/$/;"	m	struct:FTFA_MemMap	access:public
@@ -984,9 +1024,12 @@ FTFA_MemMap::FPROT3	include/MKL25Z4.h	/^  uint8_t FPROT3;                       
 FTFA_MemMap::FSEC	include/MKL25Z4.h	/^  uint8_t FSEC;                                    \/**< Flash Security Register, offset: 0x2 *\/$/;"	m	struct:FTFA_MemMap	access:public
 FTFA_MemMap::FSTAT	include/MKL25Z4.h	/^  uint8_t FSTAT;                                   \/**< Flash Status Register, offset: 0x0 *\/$/;"	m	struct:FTFA_MemMap	access:public
 FTFA_MemMapPtr	include/MKL25Z4.h	/^} volatile *FTFA_MemMapPtr;$/;"	t
+FTFA_isr	startup/vectors.c	/^void FTFA_isr( void ) __attribute__ ((weak, alias("default_isr")));$/;"	p	file:	signature:( void )
 FUNCTION	include/MKL25Z4.h	/^    uint32_t FUNCTION;                               \/**< Function Register 0..Function Register 1, array offset: 0x28, array step: 0x10 *\/$/;"	m	struct:DWT_MemMap::__anon8	access:public
 F_CPU	include/common.h	11;"	d
+GEAR_TOOTH_SENSOR	include/jaguar.h	/^	GEAR_TOOTH_SENSOR	= 7,$/;"	e	enum:__anon13
 GENCS	include/MKL25Z4.h	/^  uint32_t GENCS;                                  \/**< TSI General Control and Status Register, offset: 0x0 *\/$/;"	m	struct:TSI_MemMap	access:public
+GET_DATA	src/uart.c	186;"	d	file:
 GPCHR	include/MKL25Z4.h	/^  uint32_t GPCHR;                                  \/**< Global Pin Control High Register, offset: 0x84 *\/$/;"	m	struct:PORT_MemMap	access:public
 GPCLR	include/MKL25Z4.h	/^  uint32_t GPCLR;                                  \/**< Global Pin Control Low Register, offset: 0x80 *\/$/;"	m	struct:PORT_MemMap	access:public
 GPIOA_PCOR	include/MKL25Z4.h	1851;"	d
@@ -1044,7 +1087,7 @@ GPIO_PDOR_PDO	include/MKL25Z4.h	1796;"	d
 GPIO_PDOR_PDO_MASK	include/MKL25Z4.h	1794;"	d
 GPIO_PDOR_PDO_SHIFT	include/MKL25Z4.h	1795;"	d
 GPIO_PDOR_REG	include/MKL25Z4.h	1772;"	d
-GPIO_PIN	src/main.c	7;"	d	file:
+GPIO_PIN	src/main.c	9;"	d	file:
 GPIO_PSOR_PTSO	include/MKL25Z4.h	1800;"	d
 GPIO_PSOR_PTSO_MASK	include/MKL25Z4.h	1798;"	d
 GPIO_PSOR_PTSO_SHIFT	include/MKL25Z4.h	1799;"	d
@@ -1053,9 +1096,12 @@ GPIO_PTOR_PTTO	include/MKL25Z4.h	1808;"	d
 GPIO_PTOR_PTTO_MASK	include/MKL25Z4.h	1806;"	d
 GPIO_PTOR_PTTO_SHIFT	include/MKL25Z4.h	1807;"	d
 GPIO_PTOR_REG	include/MKL25Z4.h	1775;"	d
-GREEN	src/main.c	72;"	d	file:
-GREEN_LED	src/main.c	4;"	d	file:
+GREEN	src/main.c	74;"	d	file:
+GREEN_LED	src/main.c	6;"	d	file:
+GYRO_SENSOR	include/jaguar.h	/^	GYRO_SENSOR			= 4,$/;"	e	enum:__anon13
+HEARTBEAT	include/jaguar.h	/^	HEARTBEAT			= 5,$/;"	e	enum:__anon16
 HW_FLOW_CONTROL	include/freedom.h	32;"	d
+HardFault_isr	startup/vectors.c	/^void HardFault_isr( void ) __attribute__ ((weak, alias("default_isr")));$/;"	p	file:	signature:( void )
 I2C0_A1	include/MKL25Z4.h	2089;"	d
 I2C0_A2	include/MKL25Z4.h	2098;"	d
 I2C0_BASE_PTR	include/MKL25Z4.h	2071;"	d
@@ -1069,6 +1115,7 @@ I2C0_S	include/MKL25Z4.h	2092;"	d
 I2C0_SLTH	include/MKL25Z4.h	2099;"	d
 I2C0_SLTL	include/MKL25Z4.h	2100;"	d
 I2C0_SMB	include/MKL25Z4.h	2097;"	d
+I2C0_isr	startup/vectors.c	/^void I2C0_isr( void ) __attribute__ ((weak, alias("default_isr")));$/;"	p	file:	signature:( void )
 I2C1_A1	include/MKL25Z4.h	2102;"	d
 I2C1_A2	include/MKL25Z4.h	2111;"	d
 I2C1_BASE_PTR	include/MKL25Z4.h	2073;"	d
@@ -1082,6 +1129,7 @@ I2C1_S	include/MKL25Z4.h	2105;"	d
 I2C1_SLTH	include/MKL25Z4.h	2112;"	d
 I2C1_SLTL	include/MKL25Z4.h	2113;"	d
 I2C1_SMB	include/MKL25Z4.h	2110;"	d
+I2C1_isr	startup/vectors.c	/^void I2C1_isr( void ) __attribute__ ((weak, alias("default_isr")));$/;"	p	file:	signature:( void )
 I2C_A1_AD	include/MKL25Z4.h	1960;"	d
 I2C_A1_AD_MASK	include/MKL25Z4.h	1958;"	d
 I2C_A1_AD_SHIFT	include/MKL25Z4.h	1959;"	d
@@ -1254,6 +1302,7 @@ INT_TPM0	include/MKL25Z4.h	/^  INT_TPM0                     = 33,               
 INT_TPM1	include/MKL25Z4.h	/^  INT_TPM1                     = 34,               \/**< TPM1 fault, overflow and channels interrupt *\/$/;"	e	enum:__anon1
 INT_TPM2	include/MKL25Z4.h	/^  INT_TPM2                     = 35,               \/**< TPM2 fault, overflow and channels interrupt *\/$/;"	e	enum:__anon1
 INT_TSI0	include/MKL25Z4.h	/^  INT_TSI0                     = 42,               \/**< TSI0 interrupt *\/$/;"	e	enum:__anon1
+INT_UART	src/uart.c	96;"	d	file:
 INT_UART0	include/MKL25Z4.h	/^  INT_UART0                    = 28,               \/**< UART0 status\/error interrupt *\/$/;"	e	enum:__anon1
 INT_UART1	include/MKL25Z4.h	/^  INT_UART1                    = 29,               \/**< UART1 status\/error interrupt *\/$/;"	e	enum:__anon1
 INT_UART2	include/MKL25Z4.h	/^  INT_UART2                    = 30,               \/**< UART2 status\/error interrupt *\/$/;"	e	enum:__anon1
@@ -1265,11 +1314,14 @@ ISFR	include/MKL25Z4.h	/^  uint32_t ISFR;                                   \/**
 ISPR	include/MKL25Z4.h	/^  uint32_t ISPR;                                   \/**< Interrupt Set Pending Register, offset: 0x100 *\/$/;"	m	struct:NVIC_MemMap	access:public
 ISR	include/isr.h	14;"	d
 ISR	startup/startup.c	/^ISR(_start)$/;"	f
-ISR	startup/vectors.c	/^ISR(nop_isr)$/;"	f
+ISR	startup/vectors.c	/^ISR(default_isr)$/;"	f
 ISR_H	include/isr.h	5;"	d
 ISTAT	include/MKL25Z4.h	/^  uint8_t ISTAT;                                   \/**< Interrupt Status register, offset: 0x80 *\/$/;"	m	struct:USB_MemMap	access:public
-IS_SET	src/main.c	75;"	d	file:
+IS_SET	src/main.c	77;"	d	file:
+JAG_UART	include/uart.h	11;"	d
 LDVAL	include/MKL25Z4.h	/^    uint32_t LDVAL;                                  \/**< Timer Load Value Register, array offset: 0x100, array step: 0x10 *\/$/;"	m	struct:PIT_MemMap::__anon10	access:public
+LIMIT	include/jaguar.h	/^	LIMIT					= 6,$/;"	e	enum:__anon20
+LIMIT_MODE	include/jaguar.h	/^	LIMIT_MODE				= 4,$/;"	e	enum:__anon21
 LINK_FLAGS	Makefile	/^LINK_FLAGS=-nostartfiles -Wl,-Map,$(TARGET).map$/;"	m
 LINK_SCRIPT	Makefile	/^LINK_SCRIPT=scripts\/linker.ld$/;"	m
 LLWU_BASE_PTR	include/MKL25Z4.h	2330;"	d
@@ -1434,6 +1486,7 @@ LLWU_PE4_WUPE14_SHIFT	include/MKL25Z4.h	2231;"	d
 LLWU_PE4_WUPE15	include/MKL25Z4.h	2235;"	d
 LLWU_PE4_WUPE15_MASK	include/MKL25Z4.h	2233;"	d
 LLWU_PE4_WUPE15_SHIFT	include/MKL25Z4.h	2234;"	d
+LLW_isr	startup/vectors.c	/^void LLW_isr( void ) __attribute__ ((weak, alias("default_isr")));$/;"	p	file:	signature:( void )
 LOCKACCESS	include/MKL25Z4.h	/^  uint32_t LOCKACCESS;                             \/**< Lock Access Register, offset: 0xFB0 *\/$/;"	m	struct:MTB_MemMap	access:public
 LOCKSTAT	include/MKL25Z4.h	/^  uint32_t LOCKSTAT;                               \/**< Lock Status Register, offset: 0xFB4 *\/$/;"	m	struct:MTB_MemMap	access:public
 LPTMR0_BASE_PTR	include/MKL25Z4.h	2455;"	d
@@ -1481,17 +1534,20 @@ LPTMR_PSR_PRESCALE	include/MKL25Z4.h	2438;"	d
 LPTMR_PSR_PRESCALE_MASK	include/MKL25Z4.h	2436;"	d
 LPTMR_PSR_PRESCALE_SHIFT	include/MKL25Z4.h	2437;"	d
 LPTMR_PSR_REG	include/MKL25Z4.h	2396;"	d
+LPTimer_isr	startup/vectors.c	/^void LPTimer_isr( void ) __attribute__ ((weak, alias("default_isr")));$/;"	p	file:	signature:( void )
 LR	include/MKL25Z4.h	/^  uint32_t LR;                                     \/**< RTC Lock Register, offset: 0x18 *\/$/;"	m	struct:RTC_MemMap	access:public
 LTMR64H	include/MKL25Z4.h	/^  uint32_t LTMR64H;                                \/**< PIT Upper Lifetime Timer Register, offset: 0xE0 *\/$/;"	m	struct:PIT_MemMap	access:public
 LTMR64L	include/MKL25Z4.h	/^  uint32_t LTMR64L;                                \/**< PIT Lower Lifetime Timer Register, offset: 0xE4 *\/$/;"	m	struct:PIT_MemMap	access:public
 LVDSC1	include/MKL25Z4.h	/^  uint8_t LVDSC1;                                  \/**< Low Voltage Detect Status And Control 1 register, offset: 0x0 *\/$/;"	m	struct:PMC_MemMap	access:public
 LVDSC2	include/MKL25Z4.h	/^  uint8_t LVDSC2;                                  \/**< Low Voltage Detect Status And Control 2 register, offset: 0x1 *\/$/;"	m	struct:PMC_MemMap	access:public
+LVD_LVW_isr	startup/vectors.c	/^void LVD_LVW_isr( void ) __attribute__ ((weak, alias("default_isr")));$/;"	p	file:	signature:( void )
 M	include/MKL25Z4.h	/^  uint8_t M;                                       \/**< SPI match register, offset: 0x7 *\/$/;"	m	struct:SPI_MemMap	access:public
 MA1	include/MKL25Z4.h	/^  uint8_t MA1;                                     \/**< UART Match Address Registers 1, offset: 0x8 *\/$/;"	m	struct:UART0_MemMap	access:public
 MA2	include/MKL25Z4.h	/^  uint8_t MA2;                                     \/**< UART Match Address Registers 2, offset: 0x9 *\/$/;"	m	struct:UART0_MemMap	access:public
 MASK	include/MKL25Z4.h	/^    uint32_t MASK;                                   \/**< MTB_DWT Comparator Mask Register, array offset: 0x24, array step: 0x10 *\/$/;"	m	struct:MTBDWT_MemMap::__anon9	access:public
 MASK	include/MKL25Z4.h	/^    uint32_t MASK;                                   \/**< Mask Register 0..Mask Register 1, array offset: 0x24, array step: 0x10 *\/$/;"	m	struct:DWT_MemMap::__anon8	access:public
 MASTER	include/MKL25Z4.h	/^  uint32_t MASTER;                                 \/**< MTB Master Register, offset: 0x4 *\/$/;"	m	struct:MTB_MemMap	access:public
+MAX_OUTPUT_VOLTAGE	include/jaguar.h	/^	MAX_OUTPUT_VOLTAGE		= 7,$/;"	e	enum:__anon21
 MCG_ATCVH	include/MKL25Z4.h	2688;"	d
 MCG_ATCVH_ATCVH	include/MKL25Z4.h	2648;"	d
 MCG_ATCVH_ATCVH_MASK	include/MKL25Z4.h	2646;"	d
@@ -1630,6 +1686,7 @@ MCG_S_OSCINIT0_SHIFT	include/MKL25Z4.h	2619;"	d
 MCG_S_PLLST_MASK	include/MKL25Z4.h	2625;"	d
 MCG_S_PLLST_SHIFT	include/MKL25Z4.h	2626;"	d
 MCG_S_REG	include/MKL25Z4.h	2532;"	d
+MCG_isr	startup/vectors.c	/^void MCG_isr( void ) __attribute__ ((weak, alias("default_isr")));$/;"	p	file:	signature:( void )
 MCM_BASE_PTR	include/MKL25Z4.h	2794;"	d
 MCM_BASE_PTRS	include/MKL25Z4.h	2796;"	d
 MCM_CPO	include/MKL25Z4.h	2813;"	d
@@ -1685,6 +1742,9 @@ ME	include/MKL25Z4.h	/^  uint8_t ME;                                      \/**< 
 MG	include/MKL25Z4.h	/^  uint32_t MG;                                     \/**< ADC Minus-Side Gain Register, offset: 0x30 *\/$/;"	m	struct:ADC_MemMap	access:public
 MOD	include/MKL25Z4.h	/^  uint32_t MOD;                                    \/**< Modulo, offset: 0x8 *\/$/;"	m	struct:TPM_MemMap	access:public
 MODECTRL	include/MKL25Z4.h	/^  uint32_t MODECTRL;                               \/**< Integration Mode Control Register, offset: 0xF00 *\/$/;"	m	struct:MTB_MemMap	access:public
+MODE_DISABLE	include/jaguar.h	/^	MODE_DISABLE	= 1,$/;"	e	enum:__anon19
+MODE_ENABLE	include/jaguar.h	/^	MODE_ENABLE		= 0,$/;"	e	enum:__anon19
+MOTOR_CONTROLLER	include/jaguar.h	/^	MOTOR_CONTROLLER	= 2,$/;"	e	enum:__anon13
 MTBDWT_BASE_PTR	include/MKL25Z4.h	3169;"	d
 MTBDWT_BASE_PTRS	include/MKL25Z4.h	3171;"	d
 MTBDWT_COMP	include/MKL25Z4.h	3209;"	d
@@ -1917,10 +1977,15 @@ MTB_TAGSET_TAGSET	include/MKL25Z4.h	2939;"	d
 MTB_TAGSET_TAGSET_MASK	include/MKL25Z4.h	2937;"	d
 MTB_TAGSET_TAGSET_SHIFT	include/MKL25Z4.h	2938;"	d
 MUXCR	include/MKL25Z4.h	/^  uint8_t MUXCR;                                   \/**< MUX Control Register, offset: 0x5 *\/$/;"	m	struct:CMP_MemMap	access:public
-NONE	src/main.c	70;"	d	file:
+NAND_C2	src/uart.c	87;"	d	file:
+NI	include/jaguar.h	/^	NI			= 1,$/;"	e	enum:__anon14
+NMI_isr	startup/vectors.c	/^void NMI_isr( void ) __attribute__ ((weak, alias("default_isr")));$/;"	p	file:	signature:( void )
+NONE	src/main.c	72;"	d	file:
 NO_PLL_INIT	include/freedom.h	25;"	d
 NULL	include/arm_cm0.h	54;"	d
 NULL	include/arm_cm0.h	56;"	d
+NUM_BRUSHES	include/jaguar.h	/^	NUM_BRUSHES				= 0,$/;"	e	enum:__anon21
+NUM_POT_TURNS	include/jaguar.h	/^	NUM_POT_TURNS			= 2,$/;"	e	enum:__anon21
 NVIC_BASE_PTR	include/MKL25Z4.h	3587;"	d
 NVIC_BASE_PTRS	include/MKL25Z4.h	3589;"	d
 NVIC_ICER	include/MKL25Z4.h	3604;"	d
@@ -2049,6 +2114,7 @@ NVIC_ISPR_REG	include/MKL25Z4.h	3448;"	d
 NVIC_ISPR_SETPEND	include/MKL25Z4.h	3477;"	d
 NVIC_ISPR_SETPEND_MASK	include/MKL25Z4.h	3475;"	d
 NVIC_ISPR_SETPEND_SHIFT	include/MKL25Z4.h	3476;"	d
+NVIC_IntEnable	include/common.h	29;"	d
 NVIC_MemMap	include/MKL25Z4.h	/^typedef struct NVIC_MemMap {$/;"	s
 NVIC_MemMap::ICER	include/MKL25Z4.h	/^  uint32_t ICER;                                   \/**< Interrupt Clear Enable Register, offset: 0x80 *\/$/;"	m	struct:NVIC_MemMap	access:public
 NVIC_MemMap::ICPR	include/MKL25Z4.h	/^  uint32_t ICPR;                                   \/**< Interrupt Clear Pending Register, offset: 0x180 *\/$/;"	m	struct:NVIC_MemMap	access:public
@@ -2163,6 +2229,7 @@ NV_MemMap::FPROT2	include/MKL25Z4.h	/^  uint8_t FPROT2;                         
 NV_MemMap::FPROT3	include/MKL25Z4.h	/^  uint8_t FPROT3;                                  \/**< Non-volatile P-Flash Protection 1 - Low Register, offset: 0x8 *\/$/;"	m	struct:NV_MemMap	access:public
 NV_MemMap::FSEC	include/MKL25Z4.h	/^  uint8_t FSEC;                                    \/**< Non-volatile Flash Security Register, offset: 0xC *\/$/;"	m	struct:NV_MemMap	access:public
 NV_MemMapPtr	include/MKL25Z4.h	/^} volatile *NV_MemMapPtr;$/;"	t
+N_UART	src/uart.c	11;"	d	file:
 OBJCP	Makefile	/^OBJCP=$(CROSS)objcopy$/;"	m
 OBJS	Makefile	/^OBJS=$(subst .c,.o,$(C_SRCS))$/;"	m
 OBSERVE	include/MKL25Z4.h	/^  uint8_t OBSERVE;                                 \/**< USB OTG Observe register, offset: 0x104 *\/$/;"	m	struct:USB_MemMap	access:public
@@ -2171,6 +2238,7 @@ OFF	include/arm_cm0.h	66;"	d
 OFS	include/MKL25Z4.h	/^  uint32_t OFS;                                    \/**< ADC Offset Correction Register, offset: 0x28 *\/$/;"	m	struct:ADC_MemMap	access:public
 ON	include/arm_cm0.h	59;"	d
 ON	include/arm_cm0.h	61;"	d
+OR_C2	src/uart.c	84;"	d	file:
 OSC0_BASE_PTR	include/MKL25Z4.h	3691;"	d
 OSC0_CR	include/MKL25Z4.h	3707;"	d
 OSC_BASE_PTRS	include/MKL25Z4.h	3693;"	d
@@ -2194,6 +2262,8 @@ OTGCTL	include/MKL25Z4.h	/^  uint8_t OTGCTL;                                  \/
 OTGICR	include/MKL25Z4.h	/^  uint8_t OTGICR;                                  \/**< OTG Interrupt Control Register, offset: 0x14 *\/$/;"	m	struct:USB_MemMap	access:public
 OTGISTAT	include/MKL25Z4.h	/^  uint8_t OTGISTAT;                                \/**< OTG Interrupt Status register, offset: 0x10 *\/$/;"	m	struct:USB_MemMap	access:public
 OTGSTAT	include/MKL25Z4.h	/^  uint8_t OTGSTAT;                                 \/**< OTG Status register, offset: 0x18 *\/$/;"	m	struct:USB_MemMap	access:public
+OUTPUT_VOLTAGE	include/jaguar.h	/^	OUTPUT_VOLTAGE			= 10,$/;"	e	enum:__anon20
+OUTPUT_VOLTAGE_PERCENT	include/jaguar.h	/^	OUTPUT_VOLTAGE_PERCENT	= 0,$/;"	e	enum:__anon20
 OUT_FORMAT	Makefile	/^OUT_FORMAT=srec$/;"	m
 PCOR	include/MKL25Z4.h	/^  uint32_t PCOR;                                   \/**< Port Clear Output Register, offset: 0x8 *\/$/;"	m	struct:FGPIO_MemMap	access:public
 PCOR	include/MKL25Z4.h	/^  uint32_t PCOR;                                   \/**< Port Clear Output Register, offset: 0x8 *\/$/;"	m	struct:GPIO_MemMap	access:public
@@ -2210,6 +2280,11 @@ PE2	include/MKL25Z4.h	/^  uint8_t PE2;                                     \/**<
 PE3	include/MKL25Z4.h	/^  uint8_t PE3;                                     \/**< LLWU Pin Enable 3 register, offset: 0x2 *\/$/;"	m	struct:LLWU_MemMap	access:public
 PE4	include/MKL25Z4.h	/^  uint8_t PE4;                                     \/**< LLWU Pin Enable 4 register, offset: 0x3 *\/$/;"	m	struct:LLWU_MemMap	access:public
 PERID	include/MKL25Z4.h	/^  uint8_t PERID;                                   \/**< Peripheral ID register, offset: 0x0 *\/$/;"	m	struct:USB_MemMap	access:public
+PERIODIC_STATUS	include/jaguar.h	/^	PERIODIC_STATUS			= 6,$/;"	e	enum:__anon15
+PERIODIC_STATUS_0	include/jaguar.h	/^	PERIODIC_STATUS_0		= 8,$/;"	e	enum:__anon22
+PERIODIC_STATUS_1	include/jaguar.h	/^	PERIODIC_STATUS_1		= 9,$/;"	e	enum:__anon22
+PERIODIC_STATUS_2	include/jaguar.h	/^	PERIODIC_STATUS_2		= 10,$/;"	e	enum:__anon22
+PERIODIC_STATUS_3	include/jaguar.h	/^	PERIODIC_STATUS_3		= 11$/;"	e	enum:__anon22
 PERIPHID	include/MKL25Z4.h	/^  uint32_t PERIPHID[8];                            \/**< Peripheral ID Register, array offset: 0xFD0, array step: 0x4 *\/$/;"	m	struct:MTBDWT_MemMap	access:public
 PERIPHID	include/MKL25Z4.h	/^  uint32_t PERIPHID[8];                            \/**< Peripheral ID Register, array offset: 0xFD0, array step: 0x4 *\/$/;"	m	struct:MTB_MemMap	access:public
 PERIPHID0	include/MKL25Z4.h	/^  uint32_t PERIPHID0;                              \/**< Peripheral ID Register, offset: 0xFE0 *\/$/;"	m	struct:ROM_MemMap	access:public
@@ -2289,6 +2364,7 @@ PIT_TFLG1	include/MKL25Z4.h	3841;"	d
 PIT_TFLG_REG	include/MKL25Z4.h	3760;"	d
 PIT_TFLG_TIF_MASK	include/MKL25Z4.h	3805;"	d
 PIT_TFLG_TIF_SHIFT	include/MKL25Z4.h	3806;"	d
+PIT_isr	startup/vectors.c	/^void PIT_isr( void ) __attribute__ ((weak, alias("default_isr")));$/;"	p	file:	signature:( void )
 PLACR	include/MKL25Z4.h	/^  uint32_t PLACR;                                  \/**< Platform Control Register, offset: 0xC *\/$/;"	m	struct:MCM_MemMap	access:public
 PLAMC	include/MKL25Z4.h	/^  uint16_t PLAMC;                                  \/**< Crossbar Switch (AXBS) Master Configuration, offset: 0xA *\/$/;"	m	struct:MCM_MemMap	access:public
 PLASC	include/MKL25Z4.h	/^  uint16_t PLASC;                                  \/**< Crossbar Switch (AXBS) Slave Configuration, offset: 0x8 *\/$/;"	m	struct:MCM_MemMap	access:public
@@ -2569,6 +2645,9 @@ PORT_PCR_REG	include/MKL25Z4.h	4002;"	d
 PORT_PCR_SRE_MASK	include/MKL25Z4.h	4026;"	d
 PORT_PCR_SRE_SHIFT	include/MKL25Z4.h	4027;"	d
 POSITION	include/MKL25Z4.h	/^  uint32_t POSITION;                               \/**< MTB Position Register, offset: 0x0 *\/$/;"	m	struct:MTB_MemMap	access:public
+POSITION	include/jaguar.h	/^	POSITION				= 4,$/;"	e	enum:__anon20
+POSITION_CONTROL	include/jaguar.h	/^	POSITION_CONTROL		= 3,$/;"	e	enum:__anon15
+POWER	include/jaguar.h	/^	POWER					= 8,$/;"	e	enum:__anon20
 PSOR	include/MKL25Z4.h	/^  uint32_t PSOR;                                   \/**< Port Set Output Register, offset: 0x4 *\/$/;"	m	struct:FGPIO_MemMap	access:public
 PSOR	include/MKL25Z4.h	/^  uint32_t PSOR;                                   \/**< Port Set Output Register, offset: 0x4 *\/$/;"	m	struct:GPIO_MemMap	access:public
 PSR	include/MKL25Z4.h	/^  uint32_t PSR;                                    \/**< Low Power Timer Prescale Register, offset: 0x4 *\/$/;"	m	struct:LPTMR_MemMap	access:public
@@ -2579,6 +2658,9 @@ PTD_BASE_PTR	include/MKL25Z4.h	1831;"	d
 PTE_BASE_PTR	include/MKL25Z4.h	1833;"	d
 PTOR	include/MKL25Z4.h	/^  uint32_t PTOR;                                   \/**< Port Toggle Output Register, offset: 0xC *\/$/;"	m	struct:FGPIO_MemMap	access:public
 PTOR	include/MKL25Z4.h	/^  uint32_t PTOR;                                   \/**< Port Toggle Output Register, offset: 0xC *\/$/;"	m	struct:GPIO_MemMap	access:public
+PendableSrvReq_isr	startup/vectors.c	/^void PendableSrvReq_isr( void ) __attribute__ ((weak, alias("default_isr")));$/;"	p	file:	signature:( void )
+PortA_isr	startup/vectors.c	/^void PortA_isr( void ) __attribute__ ((weak, alias("default_isr")));$/;"	p	file:	signature:( void )
+PortD_isr	startup/vectors.c	/^void PortD_isr( void ) __attribute__ ((weak, alias("default_isr")));$/;"	p	file:	signature:( void )
 R	include/MKL25Z4.h	/^  uint32_t R[2];                                   \/**< ADC Data Result Register, array offset: 0x10, array step: 0x4 *\/$/;"	m	struct:ADC_MemMap	access:public
 RA	include/MKL25Z4.h	/^  uint8_t RA;                                      \/**< I2C Range Address register, offset: 0x7 *\/$/;"	m	struct:I2C_MemMap	access:public
 RCM_BASE_PTR	include/MKL25Z4.h	4377;"	d
@@ -2628,9 +2710,11 @@ RCM_SRS1_SACKERR_MASK	include/MKL25Z4.h	4357;"	d
 RCM_SRS1_SACKERR_SHIFT	include/MKL25Z4.h	4358;"	d
 RCM_SRS1_SW_MASK	include/MKL25Z4.h	4353;"	d
 RCM_SRS1_SW_SHIFT	include/MKL25Z4.h	4354;"	d
-RED	src/main.c	71;"	d	file:
-RED_LED	src/main.c	3;"	d	file:
+RED	src/main.c	73;"	d	file:
+RED_LED	src/main.c	5;"	d	file:
+REFERENCE	include/jaguar.h	/^	REFERENCE		= 6,$/;"	e	enum:__anon19
 REGSC	include/MKL25Z4.h	/^  uint8_t REGSC;                                   \/**< Regulator Status And Control register, offset: 0x2 *\/$/;"	m	struct:PMC_MemMap	access:public
+RELAY_CONTROLLER	include/jaguar.h	/^	RELAY_CONTROLLER	= 3,$/;"	e	enum:__anon13
 REQC_ARR	include/MKL25Z4.h	/^    uint8_t REQC_ARR[4];                             \/**< DMA_REQC0 register...DMA_REQC3 register., array offset: 0x0, array step: 0x1 *\/$/;"	m	union:DMA_MemMap::__anon4	access:public
 RESERVED_0	include/MKL25Z4.h	/^        uint8_t RESERVED_0[3];$/;"	m	struct:DMA_MemMap::__anon5::__anon6::__anon7	access:public
 RESERVED_0	include/MKL25Z4.h	/^    uint8_t RESERVED_0[3];$/;"	m	struct:USB_MemMap::__anon12	access:public
@@ -2704,6 +2788,8 @@ RESERVED_7	include/MKL25Z4.h	/^  uint8_t RESERVED_7[99];$/;"	m	struct:USB_MemMap
 RESERVED_8	include/MKL25Z4.h	/^  uint8_t RESERVED_8[3];$/;"	m	struct:USB_MemMap	access:public
 RESERVED_9	include/MKL25Z4.h	/^  uint8_t RESERVED_9[3];$/;"	m	struct:USB_MemMap	access:public
 REV	include/MKL25Z4.h	/^  uint8_t REV;                                     \/**< Peripheral Revision register, offset: 0x8 *\/$/;"	m	struct:USB_MemMap	access:public
+REVERSE_DIRECTION_LIMIT	include/jaguar.h	/^	REVERSE_DIRECTION_LIMIT	= 6,$/;"	e	enum:__anon21
+ROBOT_CONTROLLER	include/jaguar.h	/^	ROBOT_CONTROLLER	= 1,$/;"	e	enum:__anon13
 ROM_BASE_PTR	include/MKL25Z4.h	4528;"	d
 ROM_BASE_PTRS	include/MKL25Z4.h	4530;"	d
 ROM_COMPID	include/MKL25Z4.h	4564;"	d
@@ -2856,6 +2942,7 @@ RTC_SR_TIF_MASK	include/MKL25Z4.h	4678;"	d
 RTC_SR_TIF_SHIFT	include/MKL25Z4.h	4679;"	d
 RTC_SR_TOF_MASK	include/MKL25Z4.h	4680;"	d
 RTC_SR_TOF_SHIFT	include/MKL25Z4.h	4681;"	d
+RTC_Seconds_isr	startup/vectors.c	/^void RTC_Seconds_isr( void ) __attribute__ ((weak, alias("default_isr")));$/;"	p	file:	signature:( void )
 RTC_TAR	include/MKL25Z4.h	4732;"	d
 RTC_TAR_REG	include/MKL25Z4.h	4610;"	d
 RTC_TAR_TAR	include/MKL25Z4.h	4642;"	d
@@ -2885,12 +2972,14 @@ RTC_TSR_REG	include/MKL25Z4.h	4608;"	d
 RTC_TSR_TSR	include/MKL25Z4.h	4634;"	d
 RTC_TSR_TSR_MASK	include/MKL25Z4.h	4632;"	d
 RTC_TSR_TSR_SHIFT	include/MKL25Z4.h	4633;"	d
+RTC_isr	startup/vectors.c	/^void RTC_isr( void ) __attribute__ ((weak, alias("default_isr")));$/;"	p	file:	signature:( void )
 RVR	include/MKL25Z4.h	/^  uint32_t RVR;                                    \/**< SysTick Reload Value Register, offset: 0x4 *\/$/;"	m	struct:SysTick_MemMap	access:public
 S	include/MKL25Z4.h	/^  uint8_t S;                                       \/**< I2C Status register, offset: 0x3 *\/$/;"	m	struct:I2C_MemMap	access:public
 S	include/MKL25Z4.h	/^  uint8_t S;                                       \/**< MCG Status Register, offset: 0x6 *\/$/;"	m	struct:MCG_MemMap	access:public
 S	include/MKL25Z4.h	/^  uint8_t S;                                       \/**< SPI status register, offset: 0x3 *\/$/;"	m	struct:SPI_MemMap	access:public
 S1	include/MKL25Z4.h	/^  uint8_t S1;                                      \/**< UART Status Register 1, offset: 0x4 *\/$/;"	m	struct:UART0_MemMap	access:public
 S1	include/MKL25Z4.h	/^  uint8_t S1;                                      \/**< UART Status Register 1, offset: 0x4 *\/$/;"	m	struct:UART_MemMap	access:public
+S1	src/uart.c	139;"	d	file:
 S2	include/MKL25Z4.h	/^  uint8_t S2;                                      \/**< UART Status Register 2, offset: 0x5 *\/$/;"	m	struct:UART0_MemMap	access:public
 S2	include/MKL25Z4.h	/^  uint8_t S2;                                      \/**< UART Status Register 2, offset: 0x5 *\/$/;"	m	struct:UART_MemMap	access:public
 SAR	include/MKL25Z4.h	/^    uint32_t SAR;                                    \/**< Source Address Register, array offset: 0x100, array step: 0x10 *\/$/;"	m	struct:DMA_MemMap::__anon5	access:public
@@ -3013,12 +3102,19 @@ SCB_VTOR_TBLOFF	include/MKL25Z4.h	4849;"	d
 SCB_VTOR_TBLOFF_MASK	include/MKL25Z4.h	4847;"	d
 SCB_VTOR_TBLOFF_SHIFT	include/MKL25Z4.h	4848;"	d
 SCGC4	include/MKL25Z4.h	/^  uint32_t SCGC4;                                  \/**< System Clock Gating Control Register 4, offset: 0x1034 *\/$/;"	m	struct:SIM_MemMap	access:public
+SCGC4_MASK	src/uart.c	39;"	d	file:
 SCGC5	include/MKL25Z4.h	/^  uint32_t SCGC5;                                  \/**< System Clock Gating Control Register 5, offset: 0x1038 *\/$/;"	m	struct:SIM_MemMap	access:public
 SCGC6	include/MKL25Z4.h	/^  uint32_t SCGC6;                                  \/**< System Clock Gating Control Register 6, offset: 0x103C *\/$/;"	m	struct:SIM_MemMap	access:public
 SCGC7	include/MKL25Z4.h	/^  uint32_t SCGC7;                                  \/**< System Clock Gating Control Register 7, offset: 0x1040 *\/$/;"	m	struct:SIM_MemMap	access:public
 SCR	include/MKL25Z4.h	/^  uint32_t SCR;                                    \/**< System Control Register, offset: 0xD10 *\/$/;"	m	struct:SCB_MemMap	access:public
 SCR	include/MKL25Z4.h	/^  uint8_t SCR;                                     \/**< CMP Status and Control Register, offset: 0x3 *\/$/;"	m	struct:CMP_MemMap	access:public
 SDID	include/MKL25Z4.h	/^  uint32_t SDID;                                   \/**< System Device Identification Register, offset: 0x1024 *\/$/;"	m	struct:SIM_MemMap	access:public
+SET	include/jaguar.h	/^	SET				= 2,$/;"	e	enum:__anon19
+SET_D	include/jaguar.h	/^	SET_D			= 5,$/;"	e	enum:__anon19
+SET_DATA	src/uart.c	189;"	d	file:
+SET_I	include/jaguar.h	/^	SET_I			= 4,$/;"	e	enum:__anon19
+SET_NO_ACK	include/jaguar.h	/^	SET_NO_ACK		= 11$/;"	e	enum:__anon19
+SET_P	include/jaguar.h	/^	SET_P			= 3,$/;"	e	enum:__anon19
 SHCSR	include/MKL25Z4.h	/^  uint32_t SHCSR;                                  \/**< System Handler Control and State Register, offset: 0xD24 *\/$/;"	m	struct:SCB_MemMap	access:public
 SHPR2	include/MKL25Z4.h	/^  uint32_t SHPR2;                                  \/**< System Handler Priority Register 2, offset: 0xD1C *\/$/;"	m	struct:SCB_MemMap	access:public
 SHPR3	include/MKL25Z4.h	/^  uint32_t SHPR3;                                  \/**< System Handler Priority Register 3, offset: 0xD20 *\/$/;"	m	struct:SCB_MemMap	access:public
@@ -3306,6 +3402,7 @@ SMC_STOPCTRL_REG	include/MKL25Z4.h	5302;"	d
 SMC_STOPCTRL_VLLSM	include/MKL25Z4.h	5338;"	d
 SMC_STOPCTRL_VLLSM_MASK	include/MKL25Z4.h	5336;"	d
 SMC_STOPCTRL_VLLSM_SHIFT	include/MKL25Z4.h	5337;"	d
+SOF	src/jaguar.c	/^	char			SOF;$/;"	m	struct:__anon26	file:	access:public
 SOFTHLD	include/MKL25Z4.h	/^  uint8_t SOFTHLD;                                 \/**< SOF Threshold Register, offset: 0xAC *\/$/;"	m	struct:USB_MemMap	access:public
 SOPT1	include/MKL25Z4.h	/^  uint32_t SOPT1;                                  \/**< System Options Register 1, offset: 0x0 *\/$/;"	m	struct:SIM_MemMap	access:public
 SOPT1CFG	include/MKL25Z4.h	/^  uint32_t SOPT1CFG;                               \/**< SOPT1 Configuration Register, offset: 0x4 *\/$/;"	m	struct:SIM_MemMap	access:public
@@ -3313,6 +3410,8 @@ SOPT2	include/MKL25Z4.h	/^  uint32_t SOPT2;                                  \/*
 SOPT4	include/MKL25Z4.h	/^  uint32_t SOPT4;                                  \/**< System Options Register 4, offset: 0x100C *\/$/;"	m	struct:SIM_MemMap	access:public
 SOPT5	include/MKL25Z4.h	/^  uint32_t SOPT5;                                  \/**< System Options Register 5, offset: 0x1010 *\/$/;"	m	struct:SIM_MemMap	access:public
 SOPT7	include/MKL25Z4.h	/^  uint32_t SOPT7;                                  \/**< System Options Register 7, offset: 0x1018 *\/$/;"	m	struct:SIM_MemMap	access:public
+SPEED	include/jaguar.h	/^	SPEED					= 5,$/;"	e	enum:__anon20
+SPEED_CONTROL	include/jaguar.h	/^	SPEED_CONTROL			= 1,$/;"	e	enum:__anon15
 SPI0_BASE_PTR	include/MKL25Z4.h	5506;"	d
 SPI0_BR	include/MKL25Z4.h	5526;"	d
 SPI0_C1	include/MKL25Z4.h	5524;"	d
@@ -3320,6 +3419,7 @@ SPI0_C2	include/MKL25Z4.h	5525;"	d
 SPI0_D	include/MKL25Z4.h	5528;"	d
 SPI0_M	include/MKL25Z4.h	5529;"	d
 SPI0_S	include/MKL25Z4.h	5527;"	d
+SPI0_isr	startup/vectors.c	/^void SPI0_isr( void ) __attribute__ ((weak, alias("default_isr")));$/;"	p	file:	signature:( void )
 SPI1_BASE_PTR	include/MKL25Z4.h	5508;"	d
 SPI1_BR	include/MKL25Z4.h	5533;"	d
 SPI1_C1	include/MKL25Z4.h	5531;"	d
@@ -3327,6 +3427,7 @@ SPI1_C2	include/MKL25Z4.h	5532;"	d
 SPI1_D	include/MKL25Z4.h	5535;"	d
 SPI1_M	include/MKL25Z4.h	5536;"	d
 SPI1_S	include/MKL25Z4.h	5534;"	d
+SPI1_isr	startup/vectors.c	/^void SPI1_isr( void ) __attribute__ ((weak, alias("default_isr")));$/;"	p	file:	signature:( void )
 SPI_BASE_PTRS	include/MKL25Z4.h	5510;"	d
 SPI_BR_REG	include/MKL25Z4.h	5421;"	d
 SPI_BR_SPPR	include/MKL25Z4.h	5480;"	d
@@ -3403,8 +3504,15 @@ SRS1	include/MKL25Z4.h	/^  uint8_t SRS1;                                    \/**
 SRVCOP	include/MKL25Z4.h	/^  uint32_t SRVCOP;                                 \/**< Service COP Register, offset: 0x1104 *\/$/;"	m	struct:SIM_MemMap	access:public
 STAT	include/MKL25Z4.h	/^  uint8_t STAT;                                    \/**< Status register, offset: 0x90 *\/$/;"	m	struct:USB_MemMap	access:public
 STATUS	include/MKL25Z4.h	/^  uint32_t STATUS;                                 \/**< Capture and Compare Status, offset: 0x50 *\/$/;"	m	struct:TPM_MemMap	access:public
+STATUS	include/jaguar.h	/^	STATUS					= 5,$/;"	e	enum:__anon15
+STICKY_FAULT	include/jaguar.h	/^	STICKY_FAULT			= 11,$/;"	e	enum:__anon20
 STOPCTRL	include/MKL25Z4.h	/^  uint8_t STOPCTRL;                                \/**< Stop Control Register, offset: 0x2 *\/$/;"	m	struct:SMC_MemMap	access:public
+SVCall_isr	startup/vectors.c	/^void SVCall_isr( void ) __attribute__ ((weak, alias("default_isr")));$/;"	p	file:	signature:( void )
+SYNC_UPDATE	include/jaguar.h	/^	SYNC_UPDATE			= 6,$/;"	e	enum:__anon16
 SYSACCESS	include/MKL25Z4.h	/^  uint32_t SYSACCESS;                              \/**< System Access Register, offset: 0xFCC *\/$/;"	m	struct:ROM_MemMap	access:public
+SYSTEM_HALT	include/jaguar.h	/^	SYSTEM_HALT			= 0,$/;"	e	enum:__anon16
+SYSTEM_RESET	include/jaguar.h	/^	SYSTEM_RESET		= 1,$/;"	e	enum:__anon16
+SYSTEM_RESUME	include/jaguar.h	/^	SYSTEM_RESUME		= 10$/;"	e	enum:__anon16
 SYST_CALIB	include/MKL25Z4.h	5647;"	d
 SYST_CSR	include/MKL25Z4.h	5644;"	d
 SYST_CVR	include/MKL25Z4.h	5646;"	d
@@ -3442,18 +3550,21 @@ SysTick_RVR_REG	include/MKL25Z4.h	5577;"	d
 SysTick_RVR_RELOAD	include/MKL25Z4.h	5607;"	d
 SysTick_RVR_RELOAD_MASK	include/MKL25Z4.h	5605;"	d
 SysTick_RVR_RELOAD_SHIFT	include/MKL25Z4.h	5606;"	d
+SysTick_isr	startup/vectors.c	/^void SysTick_isr( void ) __attribute__ ((weak, alias("default_isr")));$/;"	p	file:	signature:( void )
 SystemControl_BASE_PTR	include/MKL25Z4.h	4905;"	d
 TABLEMARK	include/MKL25Z4.h	/^  uint32_t TABLEMARK;                              \/**< End of Table Marker Register, offset: 0xC *\/$/;"	m	struct:ROM_MemMap	access:public
 TAGCLEAR	include/MKL25Z4.h	/^  uint32_t TAGCLEAR;                               \/**< Claim TAG Clear Register, offset: 0xFA4 *\/$/;"	m	struct:MTB_MemMap	access:public
 TAGSET	include/MKL25Z4.h	/^  uint32_t TAGSET;                                 \/**< Claim TAG Set Register, offset: 0xFA0 *\/$/;"	m	struct:MTB_MemMap	access:public
 TAR	include/MKL25Z4.h	/^  uint32_t TAR;                                    \/**< RTC Time Alarm Register, offset: 0x8 *\/$/;"	m	struct:RTC_MemMap	access:public
-TARGET	Makefile	/^TARGET=blinky$/;"	m
+TARGET	Makefile	/^TARGET=jaguar$/;"	m
 TBCTRL	include/MKL25Z4.h	/^  uint32_t TBCTRL;                                 \/**< MTB_DWT Trace Buffer Control Register, offset: 0x200 *\/$/;"	m	struct:MTBDWT_MemMap	access:public
 TCR	include/MKL25Z4.h	/^  uint32_t TCR;                                    \/**< RTC Time Compensation Register, offset: 0xC *\/$/;"	m	struct:RTC_MemMap	access:public
 TCTRL	include/MKL25Z4.h	/^    uint32_t TCTRL;                                  \/**< Timer Control Register, array offset: 0x108, array step: 0x10 *\/$/;"	m	struct:PIT_MemMap::__anon10	access:public
+TEMPERATURE	include/jaguar.h	/^	TEMPERATURE				= 3,$/;"	e	enum:__anon20
 TERMINAL_BAUD	include/freedom.h	31;"	d
 TERM_PORT_NUM	include/freedom.h	30;"	d
 TFLG	include/MKL25Z4.h	/^    uint32_t TFLG;                                   \/**< Timer Flag Register, array offset: 0x10C, array step: 0x10 *\/$/;"	m	struct:PIT_MemMap::__anon10	access:public
+TI	include/jaguar.h	/^	TI			= 2,$/;"	e	enum:__anon14
 TOKEN	include/MKL25Z4.h	/^  uint8_t TOKEN;                                   \/**< Token register, offset: 0xA8 *\/$/;"	m	struct:USB_MemMap	access:public
 TPM0_BASE_PTR	include/MKL25Z4.h	5798;"	d
 TPM0_C0SC	include/MKL25Z4.h	5821;"	d
@@ -3475,6 +3586,7 @@ TPM0_CnV	include/MKL25Z4.h	5860;"	d
 TPM0_MOD	include/MKL25Z4.h	5820;"	d
 TPM0_SC	include/MKL25Z4.h	5818;"	d
 TPM0_STATUS	include/MKL25Z4.h	5833;"	d
+TPM0_isr	startup/vectors.c	/^void TPM0_isr( void ) __attribute__ ((weak, alias("default_isr")));$/;"	p	file:	signature:( void )
 TPM1_BASE_PTR	include/MKL25Z4.h	5800;"	d
 TPM1_C0SC	include/MKL25Z4.h	5839;"	d
 TPM1_C0V	include/MKL25Z4.h	5840;"	d
@@ -3487,6 +3599,7 @@ TPM1_CnV	include/MKL25Z4.h	5861;"	d
 TPM1_MOD	include/MKL25Z4.h	5838;"	d
 TPM1_SC	include/MKL25Z4.h	5836;"	d
 TPM1_STATUS	include/MKL25Z4.h	5843;"	d
+TPM1_isr	startup/vectors.c	/^void TPM1_isr( void ) __attribute__ ((weak, alias("default_isr")));$/;"	p	file:	signature:( void )
 TPM2_BASE_PTR	include/MKL25Z4.h	5802;"	d
 TPM2_C0SC	include/MKL25Z4.h	5849;"	d
 TPM2_C0V	include/MKL25Z4.h	5850;"	d
@@ -3499,6 +3612,7 @@ TPM2_CnV	include/MKL25Z4.h	5862;"	d
 TPM2_MOD	include/MKL25Z4.h	5848;"	d
 TPM2_SC	include/MKL25Z4.h	5846;"	d
 TPM2_STATUS	include/MKL25Z4.h	5853;"	d
+TPM2_isr	startup/vectors.c	/^void TPM2_isr( void ) __attribute__ ((weak, alias("default_isr")));$/;"	p	file:	signature:( void )
 TPM_BASE_PTRS	include/MKL25Z4.h	5804;"	d
 TPM_CNT_COUNT	include/MKL25Z4.h	5734;"	d
 TPM_CNT_COUNT_MASK	include/MKL25Z4.h	5732;"	d
@@ -3594,6 +3708,8 @@ TSI0_BASE_PTR	include/MKL25Z4.h	5982;"	d
 TSI0_DATA	include/MKL25Z4.h	5999;"	d
 TSI0_GENCS	include/MKL25Z4.h	5998;"	d
 TSI0_TSHD	include/MKL25Z4.h	6000;"	d
+TSI0_isr	src/tss.c	/^void TSI0_isr(void)$/;"	f	signature:(void)
+TSI0_isr	startup/vectors.c	/^void TSI0_isr( void ) __attribute__ ((weak, alias("default_isr")));$/;"	p	file:	signature:( void )
 TSI_BASE_PTRS	include/MKL25Z4.h	5984;"	d
 TSI_DATA_DMAEN_MASK	include/MKL25Z4.h	5962;"	d
 TSI_DATA_DMAEN_SHIFT	include/MKL25Z4.h	5963;"	d
@@ -3827,6 +3943,8 @@ UART0_S2_RXEDGIF_MASK	include/MKL25Z4.h	6391;"	d
 UART0_S2_RXEDGIF_SHIFT	include/MKL25Z4.h	6392;"	d
 UART0_S2_RXINV_MASK	include/MKL25Z4.h	6387;"	d
 UART0_S2_RXINV_SHIFT	include/MKL25Z4.h	6388;"	d
+UART0_isr	src/uart.c	/^void UART0_isr(void)$/;"	f	signature:(void)
+UART0_isr	startup/vectors.c	/^void UART0_isr( void ) __attribute__ ((weak, alias("default_isr")));$/;"	p	file:	signature:( void )
 UART1_BASE_PTR	include/MKL25Z4.h	6202;"	d
 UART1_BDH	include/MKL25Z4.h	6220;"	d
 UART1_BDL	include/MKL25Z4.h	6221;"	d
@@ -3837,6 +3955,8 @@ UART1_C4	include/MKL25Z4.h	6228;"	d
 UART1_D	include/MKL25Z4.h	6227;"	d
 UART1_S1	include/MKL25Z4.h	6224;"	d
 UART1_S2	include/MKL25Z4.h	6225;"	d
+UART1_isr	src/uart.c	/^void UART1_isr(void)$/;"	f	signature:(void)
+UART1_isr	startup/vectors.c	/^void UART1_isr( void ) __attribute__ ((weak, alias("default_isr")));$/;"	p	file:	signature:( void )
 UART2_BASE_PTR	include/MKL25Z4.h	6204;"	d
 UART2_BDH	include/MKL25Z4.h	6230;"	d
 UART2_BDL	include/MKL25Z4.h	6231;"	d
@@ -3847,6 +3967,8 @@ UART2_C4	include/MKL25Z4.h	6238;"	d
 UART2_D	include/MKL25Z4.h	6237;"	d
 UART2_S1	include/MKL25Z4.h	6234;"	d
 UART2_S2	include/MKL25Z4.h	6235;"	d
+UART2_isr	src/uart.c	/^void UART2_isr(void)$/;"	f	signature:(void)
+UART2_isr	startup/vectors.c	/^void UART2_isr( void ) __attribute__ ((weak, alias("default_isr")));$/;"	p	file:	signature:( void )
 UART_BASE_PTRS	include/MKL25Z4.h	6206;"	d
 UART_BDH_LBKDIE_MASK	include/MKL25Z4.h	6077;"	d
 UART_BDH_LBKDIE_SHIFT	include/MKL25Z4.h	6078;"	d
@@ -3862,7 +3984,7 @@ UART_BDL_REG	include/MKL25Z4.h	6046;"	d
 UART_BDL_SBR	include/MKL25Z4.h	6082;"	d
 UART_BDL_SBR_MASK	include/MKL25Z4.h	6080;"	d
 UART_BDL_SBR_SHIFT	include/MKL25Z4.h	6081;"	d
-UART_BUFFER_SIZE	src/uart.c	9;"	d	file:
+UART_BUFFER_SIZE	src/uart.c	10;"	d	file:
 UART_C1_ILT_MASK	include/MKL25Z4.h	6088;"	d
 UART_C1_ILT_SHIFT	include/MKL25Z4.h	6089;"	d
 UART_C1_LOOPS_MASK	include/MKL25Z4.h	6098;"	d
@@ -3985,9 +4107,11 @@ UART_S2_RXEDGIF_MASK	include/MKL25Z4.h	6145;"	d
 UART_S2_RXEDGIF_SHIFT	include/MKL25Z4.h	6146;"	d
 UART_S2_RXINV_MASK	include/MKL25Z4.h	6143;"	d
 UART_S2_RXINV_SHIFT	include/MKL25Z4.h	6144;"	d
+UART_isr	src/uart.c	/^void UART_isr( int idx )$/;"	f	signature:( int idx )
 UIDL	include/MKL25Z4.h	/^  uint32_t UIDL;                                   \/**< Unique Identification Register Low, offset: 0x1060 *\/$/;"	m	struct:SIM_MemMap	access:public
 UIDMH	include/MKL25Z4.h	/^  uint32_t UIDMH;                                  \/**< Unique Identification Register Mid-High, offset: 0x1058 *\/$/;"	m	struct:SIM_MemMap	access:public
 UIDML	include/MKL25Z4.h	/^  uint32_t UIDML;                                  \/**< Unique Identification Register Mid Low, offset: 0x105C *\/$/;"	m	struct:SIM_MemMap	access:public
+ULTRASONIC_SENSOR	include/jaguar.h	/^	ULTRASONIC_SENSOR	= 6,$/;"	e	enum:__anon13
 USB0_ADDINFO	include/MKL25Z4.h	6882;"	d
 USB0_ADDR	include/MKL25Z4.h	6893;"	d
 USB0_BASE_PTR	include/MKL25Z4.h	6863;"	d
@@ -4032,6 +4156,7 @@ USB0_STAT	include/MKL25Z4.h	6891;"	d
 USB0_TOKEN	include/MKL25Z4.h	6897;"	d
 USB0_USBCTRL	include/MKL25Z4.h	6917;"	d
 USB0_USBTRC0	include/MKL25Z4.h	6920;"	d
+USB0_isr	startup/vectors.c	/^void USB0_isr( void ) __attribute__ ((weak, alias("default_isr")));$/;"	p	file:	signature:( void )
 USBCTRL	include/MKL25Z4.h	/^  uint8_t USBCTRL;                                 \/**< USB Control register, offset: 0x100 *\/$/;"	m	struct:USB_MemMap	access:public
 USBTRC0	include/MKL25Z4.h	/^  uint8_t USBTRC0;                                 \/**< USB Transceiver Control Register 0, offset: 0x10C *\/$/;"	m	struct:USB_MemMap	access:public
 USB_ADDINFO_IEHOST_MASK	include/MKL25Z4.h	6637;"	d
@@ -4322,85 +4447,131 @@ USB_USBTRC0_USBRESMEN_MASK	include/MKL25Z4.h	6851;"	d
 USB_USBTRC0_USBRESMEN_SHIFT	include/MKL25Z4.h	6852;"	d
 USB_USBTRC0_USB_RESUME_INT_MASK	include/MKL25Z4.h	6847;"	d
 USB_USBTRC0_USB_RESUME_INT_SHIFT	include/MKL25Z4.h	6848;"	d
+VOLTAGE_COMP_CONTROL	include/jaguar.h	/^	VOLTAGE_COMP_CONTROL	= 2,$/;"	e	enum:__anon15
+VOLTAGE_COMP_MODE_DISABLE	include/jaguar.h	/^	VOLTAGE_COMP_MODE_DISABLE	= 1,$/;"	e	enum:__anon18
+VOLTAGE_COMP_MODE_ENABLE	include/jaguar.h	/^	VOLTAGE_COMP_MODE_ENABLE	= 0,$/;"	e	enum:__anon18
+VOLTAGE_COMP_SET	include/jaguar.h	/^	VOLTAGE_COMP_SET			= 4,$/;"	e	enum:__anon18
+VOLTAGE_CONTROL	include/jaguar.h	/^	VOLTAGE_CONTROL			= 0,$/;"	e	enum:__anon15
+VOLTAGE_MODE_DISABLE	include/jaguar.h	/^	VOLTAGE_MODE_DISABLE	= 1,$/;"	e	enum:__anon17
+VOLTAGE_MODE_ENABLE	include/jaguar.h	/^	VOLTAGE_MODE_ENABLE		= 0,$/;"	e	enum:__anon17
+VOLTAGE_RAMP_SET	include/jaguar.h	/^	VOLTAGE_RAMP_SET			= 3,$/;"	e	enum:__anon18
+VOLTAGE_RAMP_SET	include/jaguar.h	/^	VOLTAGE_RAMP_SET		= 3,$/;"	e	enum:__anon17
+VOLTAGE_SET	include/jaguar.h	/^	VOLTAGE_SET					= 2,$/;"	e	enum:__anon18
+VOLTAGE_SET	include/jaguar.h	/^	VOLTAGE_SET				= 2,$/;"	e	enum:__anon17
+VOLTAGE_SET_NO_ACK	include/jaguar.h	/^	VOLTAGE_SET_NO_ACK			= 9$/;"	e	enum:__anon18
+VOLTAGE_SET_NO_ACK	include/jaguar.h	/^	VOLTAGE_SET_NO_ACK		= 8$/;"	e	enum:__anon17
 VTOR	include/MKL25Z4.h	/^  uint32_t VTOR;                                   \/**< Vector Table Offset Register, offset: 0xD08 *\/$/;"	m	struct:SCB_MemMap	access:public
 _CIRCULAR_BUF_H_	include/circular_buf.h	8;"	d
 _COMMON_H_	include/common.h	9;"	d
 _CPU_ARM_CM0_H	include/arm_cm0.h	9;"	d
+_JAGUAR_H_	include/jaguar.h	7;"	d
+_TSS_H_	include/tss.h	8;"	d
 _UART_H_	include/uart.h	8;"	d
 __FREEDOM_H__	include/freedom.h	9;"	d
-__anon13::__fun	include/isr.h	/^	isr_func_t __fun[0x2F];$/;"	m	struct:__anon13	access:public
-__anon13::__ptr	include/isr.h	/^	uint32_t * __ptr;$/;"	m	struct:__anon13	access:public
-__anon14::buf_size	include/circular_buf.h	/^	size_t buf_size;			\/\/ the size of the data buffer$/;"	m	struct:__anon14	access:public
-__anon14::buffer	include/circular_buf.h	/^	char *buffer;				\/\/ the data buffer$/;"	m	struct:__anon14	access:public
-__anon14::head	include/circular_buf.h	/^	size_t head;				\/\/ the next element to read from$/;"	m	struct:__anon14	access:public
-__anon14::size	include/circular_buf.h	/^	size_t size;				\/\/ the current size of the data buffer$/;"	m	struct:__anon14	access:public
-__anon14::tail	include/circular_buf.h	/^	size_t tail;				\/\/ the next element to write to$/;"	m	struct:__anon14	access:public
-__anon15::buf_size	src/circluar_buf.c	/^	size_t buf_size;			\/\/ the size of the data buffer$/;"	m	struct:__anon15	file:	access:public
-__anon15::buffer	src/circluar_buf.c	/^	char *buffer;				\/\/ the data buffer$/;"	m	struct:__anon15	file:	access:public
-__anon15::head	src/circluar_buf.c	/^	size_t head;				\/\/ the next element to read from$/;"	m	struct:__anon15	file:	access:public
-__anon15::size	src/circluar_buf.c	/^	size_t size;				\/\/ the current size of the data buffer$/;"	m	struct:__anon15	file:	access:public
-__anon15::tail	src/circluar_buf.c	/^	size_t tail;				\/\/ the next element to write to$/;"	m	struct:__anon15	file:	access:public
-__fun	include/isr.h	/^	isr_func_t __fun[0x2F];$/;"	m	struct:__anon13	access:public
-__ptr	include/isr.h	/^	uint32_t * __ptr;$/;"	m	struct:__anon13	access:public
+__anon23::__fun	include/isr.h	/^	isr_func_t __fun[0x2F];$/;"	m	struct:__anon23	access:public
+__anon23::__ptr	include/isr.h	/^	uint32_t * __ptr;$/;"	m	struct:__anon23	access:public
+__anon24::buf_size	include/circular_buf.h	/^	size_t buf_size;			\/\/ the size of the data buffer$/;"	m	struct:__anon24	access:public
+__anon24::buffer	include/circular_buf.h	/^	char *buffer;				\/\/ the data buffer$/;"	m	struct:__anon24	access:public
+__anon24::head	include/circular_buf.h	/^	size_t head;				\/\/ the next element to read from$/;"	m	struct:__anon24	access:public
+__anon24::size	include/circular_buf.h	/^	size_t size;				\/\/ the current size of the data buffer$/;"	m	struct:__anon24	access:public
+__anon24::tail	include/circular_buf.h	/^	size_t tail;				\/\/ the next element to write to$/;"	m	struct:__anon24	access:public
+__anon25::api_class	src/jaguar.c	/^	uint32_t api_class	: 6;$/;"	m	struct:__anon25	file:	access:public
+__anon25::api_idx	src/jaguar.c	/^	uint32_t api_idx	: 4;$/;"	m	struct:__anon25	file:	access:public
+__anon25::devType	src/jaguar.c	/^	uint32_t devType	: 5;$/;"	m	struct:__anon25	file:	access:public
+__anon25::dev_id	src/jaguar.c	/^	uint32_t dev_id		: 6;$/;"	m	struct:__anon25	file:	access:public
+__anon25::manufact	src/jaguar.c	/^	uint32_t manufact	: 8;$/;"	m	struct:__anon25	file:	access:public
+__anon25::rsv	src/jaguar.c	/^	uint32_t rsv		: 3;$/;"	m	struct:__anon25	file:	access:public
+__anon26::SOF	src/jaguar.c	/^	char			SOF;$/;"	m	struct:__anon26	file:	access:public
+__anon26::data	src/jaguar.c	/^	char[8]			data;$/;"	m	struct:__anon26	file:	access:public
+__anon26::header	src/jaguar.c	/^	jaguar_header_t header;$/;"	m	struct:__anon26	file:	access:public
+__anon26::size	src/jaguar.c	/^	char			size;$/;"	m	struct:__anon26	file:	access:public
+__disable_interrupts	include/common.h	36;"	d
+__enable_interrupts	include/common.h	31;"	d
+__fun	include/isr.h	/^	isr_func_t __fun[0x2F];$/;"	m	struct:__anon23	access:public
+__ptr	include/isr.h	/^	uint32_t * __ptr;$/;"	m	struct:__anon23	access:public
 __vector_table	startup/vectors.c	/^__attribute__ ((section (".vectortable"))) const vector_table_t __vector_table = $/;"	v
 _start	startup/vectors.c	/^extern void _start( void );$/;"	p	file:	signature:( void )
+api_class	src/jaguar.c	/^	uint32_t api_class	: 6;$/;"	m	struct:__anon25	file:	access:public
+api_class_type	include/jaguar.h	/^} api_class_type;$/;"	t	typeref:enum:__anon15
+api_idx	src/jaguar.c	/^	uint32_t api_idx	: 4;$/;"	m	struct:__anon25	file:	access:public
 base_DCRDR	include/MKL25Z4.h	/^  uint32_t base_DCRDR;                             \/**< Debug Core Register Data Register, offset: 0x8 *\/$/;"	m	struct:CoreDebug_MemMap	access:public
 base_DCRSR	include/MKL25Z4.h	/^  uint32_t base_DCRSR;                             \/**< Debug Core Register Selector Register, offset: 0x4 *\/$/;"	m	struct:CoreDebug_MemMap	access:public
 base_DEMCR	include/MKL25Z4.h	/^  uint32_t base_DEMCR;                             \/**< Debug Exception and Monitor Control Register, offset: 0xC *\/$/;"	m	struct:CoreDebug_MemMap	access:public
 base_DHCSR_Read	include/MKL25Z4.h	/^    uint32_t base_DHCSR_Read;                        \/**< Debug Halting Control and Status Register, offset: 0x0 *\/$/;"	m	union:CoreDebug_MemMap::__anon2	access:public
 base_DHCSR_Write	include/MKL25Z4.h	/^    uint32_t base_DHCSR_Write;                       \/**< Debug Halting Control and Status Register, offset: 0x0 *\/$/;"	m	union:CoreDebug_MemMap::__anon2	access:public
-buf_size	include/circular_buf.h	/^	size_t buf_size;			\/\/ the size of the data buffer$/;"	m	struct:__anon14	access:public
-buf_size	src/circluar_buf.c	/^	size_t buf_size;			\/\/ the size of the data buffer$/;"	m	struct:__anon15	file:	access:public
-buffer	include/circular_buf.h	/^	char *buffer;				\/\/ the data buffer$/;"	m	struct:__anon14	access:public
-buffer	src/circluar_buf.c	/^	char *buffer;				\/\/ the data buffer$/;"	m	struct:__anon15	file:	access:public
+buf_size	include/circular_buf.h	/^	size_t buf_size;			\/\/ the size of the data buffer$/;"	m	struct:__anon24	access:public
+buffer	include/circular_buf.h	/^	char *buffer;				\/\/ the data buffer$/;"	m	struct:__anon24	access:public
 c_buffer_init	include/circular_buf.h	/^c_buffer_t c_buffer_init( char *buffer, size_t buffer_size );$/;"	p	signature:( char *buffer, size_t buffer_size )
-c_buffer_init	src/circluar_buf.c	/^c_buffer_t c_buffer_init( char *buffer, size_t buffer_size )$/;"	f	signature:( char *buffer, size_t buffer_size )
+c_buffer_init	src/circular_buf.c	/^c_buffer_t c_buffer_init( char *buffer, size_t buffer_size )$/;"	f	signature:( char *buffer, size_t buffer_size )
 c_buffer_read	include/circular_buf.h	/^int c_buffer_read( c_buffer_t *buf, char *c );$/;"	p	signature:( c_buffer_t *buf, char *c )
-c_buffer_read	src/circluar_buf.c	/^int c_buffer_read( c_buffer_t *buf, char *c )$/;"	f	signature:( c_buffer_t *buf, char *c )
-c_buffer_t	include/circular_buf.h	/^} c_buffer_t;$/;"	t	typeref:struct:__anon14
-c_buffer_t	src/circluar_buf.c	/^} c_buffer_t;$/;"	t	typeref:struct:__anon15	file:
+c_buffer_read	src/circular_buf.c	/^int c_buffer_read( c_buffer_t *buf, char *c )$/;"	f	signature:( c_buffer_t *buf, char *c )
+c_buffer_t	include/circular_buf.h	/^} c_buffer_t;$/;"	t	typeref:struct:__anon24
 c_buffer_write	include/circular_buf.h	/^int c_buffer_write( c_buffer_t *buf, char c );$/;"	p	signature:( c_buffer_t *buf, char c )
-c_buffer_write	src/circluar_buf.c	/^int c_buffer_write( c_buffer_t *buf, char c )$/;"	f	signature:( c_buffer_t *buf, char c )
+c_buffer_write	src/circular_buf.c	/^int c_buffer_write( c_buffer_t *buf, char c )$/;"	f	signature:( c_buffer_t *buf, char c )
+control_mode_api	include/jaguar.h	/^} control_mode_api;$/;"	t	typeref:enum:__anon19
+data	src/jaguar.c	/^	char[8]			data;$/;"	m	struct:__anon26	file:	access:public
+devType	src/jaguar.c	/^	uint32_t devType	: 5;$/;"	m	struct:__anon25	file:	access:public
+dev_id	src/jaguar.c	/^	uint32_t dev_id		: 6;$/;"	m	struct:__anon25	file:	access:public
+device_type	include/jaguar.h	/^} device_type;$/;"	t	typeref:enum:__anon13
 disable_irq	include/arm_cm0.h	/^void disable_irq (int);$/;"	p	signature:(int)
 enable_irq	include/arm_cm0.h	/^void enable_irq (int);$/;"	p	signature:(int)
-head	include/circular_buf.h	/^	size_t head;				\/\/ the next element to read from$/;"	m	struct:__anon14	access:public
-head	src/circluar_buf.c	/^	size_t head;				\/\/ the next element to read from$/;"	m	struct:__anon15	file:	access:public
+head	include/circular_buf.h	/^	size_t head;				\/\/ the next element to read from$/;"	m	struct:__anon24	access:public
+header	src/jaguar.c	/^	jaguar_header_t header;$/;"	m	struct:__anon26	file:	access:public
 init_PWM	src/main.c	/^void init_PWM(void)$/;"	f	signature:(void)
 init_gpio	src/main.c	/^void init_gpio( void )$/;"	f	signature:( void )
 int16	include/arm_cm0.h	/^typedef short int			int16;  \/* 16 bits *\/$/;"	t
 int32	include/arm_cm0.h	/^typedef int					int32;  \/* 32 bits *\/$/;"	t
 int8	include/arm_cm0.h	/^typedef char				int8;   \/*  8 bits *\/$/;"	t
 isr_func_t	include/isr.h	/^typedef void (*const isr_func_t)(void);$/;"	t
+jaguar_device_query	include/jaguar.h	/^char[8] jaguar_device_query( uint8_t dev_id );$/;"	p	signature:( uint8_t dev_id )
+jaguar_header_t	src/jaguar.c	/^} jaguar_header_t;$/;"	t	typeref:struct:__anon25	file:
+jaguar_make_packet	src/jaguar.c	/^void jaguar_make_packet( jaguar_packet_t *packet, uint8_t api_class, uint8_t api_idx, uint8_t dev_id, uint8_t size$/;"	f	signature:( jaguar_packet_t *packet, uint8_t api_class, uint8_t api_idx, uint8_t dev_id, uint8_t size uint8_t data0, uint8_t data1, uint8_t data2, uint8_t data3, uint8_t data4, uint8_t data5, uint8_t data6, uint8_t data7 )
+jaguar_packet_t	src/jaguar.c	/^} jaguar_packet_t;$/;"	t	typeref:struct:__anon26	file:
 low_level_init	startup/low_level_init.c	/^void low_level_init( void )$/;"	f	signature:( void )
 low_level_init	startup/startup.c	/^void low_level_init(void);$/;"	p	file:	signature:(void)
 main	include/arm_cm0.h	/^int main(void);$/;"	p	signature:(void)
 main	src/main.c	/^int main( void )$/;"	f	signature:( void )
 main	startup/startup.c	/^void main(void);$/;"	p	file:	signature:(void)
+manufact	src/jaguar.c	/^	uint32_t manufact	: 8;$/;"	m	struct:__anon25	file:	access:public
+manufacturer_type	include/jaguar.h	/^} manufacturer_type;$/;"	t	typeref:enum:__anon14
+motor_control_config_api	include/jaguar.h	/^} motor_control_config_api;$/;"	t	typeref:enum:__anon21
+periodic_status_api	include/jaguar.h	/^} periodic_status_api;$/;"	t	typeref:enum:__anon22
+rsv	src/jaguar.c	/^	uint32_t rsv		: 3;$/;"	m	struct:__anon25	file:	access:public
 set_irq_priority	include/arm_cm0.h	/^void set_irq_priority (int, int);$/;"	p	signature:(int, int)
-size	include/circular_buf.h	/^	size_t size;				\/\/ the current size of the data buffer$/;"	m	struct:__anon14	access:public
-size	src/circluar_buf.c	/^	size_t size;				\/\/ the current size of the data buffer$/;"	m	struct:__anon15	file:	access:public
+size	include/circular_buf.h	/^	size_t size;				\/\/ the current size of the data buffer$/;"	m	struct:__anon24	access:public
+size	src/jaguar.c	/^	char			size;$/;"	m	struct:__anon26	file:	access:public
+status_api	include/jaguar.h	/^} status_api;$/;"	t	typeref:enum:__anon20
 stop	include/arm_cm0.h	/^void stop (void);$/;"	p	signature:(void)
-tail	include/circular_buf.h	/^	size_t tail;				\/\/ the next element to write to$/;"	m	struct:__anon14	access:public
-tail	src/circluar_buf.c	/^	size_t tail;				\/\/ the next element to write to$/;"	m	struct:__anon15	file:	access:public
-uart0_c_buf	src/uart.c	/^c_buffer_t uart0_c_buf;$/;"	v
-uart0_data	src/uart.c	/^char uart0_data[UART_BUFFER_SIZE];$/;"	v
-uart1_c_buf	src/uart.c	/^c_buffer_t uart1_c_buf;$/;"	v
-uart1_data	src/uart.c	/^char uart1_data[UART_BUFFER_SIZE];$/;"	v
-uart2_c_buf	src/uart.c	/^c_buffer_t uart2_c_buf;$/;"	v
-uart2_data	src/uart.c	/^char uart2_data[UART_BUFFER_SIZE];$/;"	v
-uart_getchar	include/uart.h	/^char uart_getchar( char id );$/;"	p	signature:( char id )
-uart_getchar	src/uart.c	/^char uart_getchar( char id );$/;"	p	file:	signature:( char id )
-uart_init	include/uart.h	/^void uart_init( char id, int baud );$/;"	p	signature:( char id, int baud )
-uart_init	src/uart.c	/^void uart_init( char id, int baud )$/;"	f	signature:( char id, int baud )
-uart_putchar	include/uart.h	/^void uart_putchar( char id, char c );$/;"	p	signature:( char id, char c )
-uart_putchar	src/uart.c	/^void uart_putchar( char id, char c );$/;"	p	file:	signature:( char id, char c )
+sys_control_api	include/jaguar.h	/^} sys_control_api;$/;"	t	typeref:enum:__anon16
+tail	include/circular_buf.h	/^	size_t tail;				\/\/ the next element to write to$/;"	m	struct:__anon24	access:public
+tss_cur_pin	src/tss.c	/^uint8_t tss_cur_pin;$/;"	v
+tss_init	include/tss.h	/^void tss_init();$/;"	p	signature:()
+tss_init	src/tss.c	/^void tss_init()$/;"	f
+tss_pin10	src/tss.c	/^uint16_t tss_pin10;$/;"	v
+tss_pin9	src/tss.c	/^uint16_t tss_pin9;$/;"	v
+uart_c_buf_rx	src/uart.c	/^c_buffer_t uart_c_buf_rx[N_UART];$/;"	v
+uart_c_buf_tx	src/uart.c	/^c_buffer_t uart_c_buf_tx[N_UART];$/;"	v
+uart_data_rx	src/uart.c	/^char uart_data_rx[N_UART][UART_BUFFER_SIZE];$/;"	v
+uart_data_tx	src/uart.c	/^char uart_data_tx[N_UART][UART_BUFFER_SIZE];$/;"	v
+uart_getchar	include/uart.h	/^char uart_getchar( int idx );$/;"	p	signature:( int idx )
+uart_getchar	src/uart.c	/^char uart_getchar( int id )$/;"	f	signature:( int id )
+uart_init	include/uart.h	/^void uart_init( int idx, int baud );$/;"	p	signature:( int idx, int baud )
+uart_init	src/uart.c	/^void uart_init( int idx, int baud )$/;"	f	signature:( int idx, int baud )
+uart_putchar	include/uart.h	/^void uart_putchar( int idx, const char c );$/;"	p	signature:( int idx, const char c )
+uart_putchar	src/uart.c	/^void uart_putchar( int id, const char c )$/;"	f	signature:( int id, const char c )
+uart_putnum	include/uart.h	/^void uart_putnum( int idx, uint32_t x, uint8_t digits );$/;"	p	signature:( int idx, uint32_t x, uint8_t digits )
+uart_putnum	src/uart.c	/^void uart_putnum( int idx, uint32_t x, uint8_t digits )$/;"	f	signature:( int idx, uint32_t x, uint8_t digits )
+uart_putstr	include/uart.h	/^void uart_putstr( int idx, const char *s );$/;"	p	signature:( int idx, const char *s )
+uart_putstr	src/uart.c	/^void uart_putstr( int idx, const char *s )$/;"	f	signature:( int idx, const char *s )
 uint16	include/arm_cm0.h	/^typedef unsigned short int	uint16; \/* 16 bits *\/$/;"	t
 uint32	include/arm_cm0.h	/^typedef unsigned long int	uint32; \/* 32 bits *\/$/;"	t
 uint8	include/arm_cm0.h	/^typedef unsigned char		uint8;  \/*  8 bits *\/$/;"	t
-vector_table_t	include/isr.h	/^} vector_table_t;$/;"	t	typeref:struct:__anon13
+vector_table_t	include/isr.h	/^} vector_table_t;$/;"	t	typeref:struct:__anon23
 vint16	include/arm_cm0.h	/^typedef volatile int16		vint16; \/* 16 bits *\/$/;"	t
 vint32	include/arm_cm0.h	/^typedef volatile int32		vint32; \/* 32 bits *\/$/;"	t
 vint8	include/arm_cm0.h	/^typedef volatile int8		vint8;  \/*  8 bits *\/$/;"	t
+voltage_comp_control_api	include/jaguar.h	/^} voltage_comp_control_api;$/;"	t	typeref:enum:__anon18
+voltage_control_api	include/jaguar.h	/^} voltage_control_api;$/;"	t	typeref:enum:__anon17
 vuint16	include/arm_cm0.h	/^typedef volatile uint16		vuint16; \/* 16 bits *\/$/;"	t
 vuint32	include/arm_cm0.h	/^typedef volatile uint32		vuint32; \/* 32 bits *\/$/;"	t
 vuint8	include/arm_cm0.h	/^typedef volatile uint8		vuint8;  \/*  8 bits *\/$/;"	t

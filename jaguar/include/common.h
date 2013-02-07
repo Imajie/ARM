@@ -8,7 +8,7 @@
 #ifndef _COMMON_H_
 #define _COMMON_H_
 
-#define F_CPU	(48000000)
+#define F_CPU	(47000000)
 /********************************************************************/
 /* 
  * Include the generic CPU header file 

@@ -1,6 +1,7 @@
 #include "common.h"
 #include "uart.h"
 #include "tss.h"
+#include "jaguar.h"
 
 #define RED_LED		(18)
 #define GREEN_LED	(19)
@@ -31,43 +32,8 @@ void init_gpio( void )
 
 }
 
-void init_PWM(void)
-{
-	// setup timer for PWM
-	
-	// set module clock to FLL
-	SIM_SOPT2 |= SIM_SOPT2_TPMSRC(1);
-	
-	// turn on TPM clock
-	SIM_SCGC6 |= SIM_SCGC6_TPM0_MASK;
 
-	// turn off module clock
-	TPM0_SC &= ~(TPM_SC_CMOD_MASK);
-
-	// wait for counter to turn off
-	while( TPM0_SC & TPM_SC_CMOD_MASK );
-	
-	// set MSB, set ELSB
-	TPM0_C0SC = (TPM_CnSC_MSB_MASK | TPM_CnSC_ELSB_MASK);
-
-	// Set the PWM period
-	TPM0_MOD = 1000;
-
-	// Set the initial value
-	TPM0_C0V = 500;
-
-	// Clear the counter
-	TPM0_CNT = 0;
-
-	// counter increments on TPM clock, PreScale = /1
-	TPM0_SC = (TPM_SC_CMOD(1) | TPM_SC_PS(0));
-
-	SIM_SCGC5 |= SIM_SCGC5_PORTC_MASK;
-	
-	PORTC_PCR1 = PORT_PCR_MUX(4);		// Set PTC1 to TPM0_CH0
-}
-
-#define DELAY 5000
+#define DELAY 500000
 
 #define NONE	(0)
 #define RED		(1<<0)
@@ -76,29 +42,47 @@ void init_PWM(void)
 
 #define IS_SET(x,y)	(((x)&(y)) == (y))
 
+#define P	( 0x00008000 )		
+#define I	( 0x00000000 )
+#define D	( 0x00000000 )
+
 int main( void )
 {
 	int i;
 
-	uart_init(CPU_UART, 9600);
+	uart_init(CPU_UART, 115200);
 	uart_init(JAG_UART, 115200);
 
 	init_gpio();
-	init_PWM();
+	init_jaguar();
 
 	__enable_interrupts();
 	for( i=0; i<DELAY; i++) ;
 
 	uart_putstr( CPU_UART, "Initialization Complete\r\n" );
 
-	while( 1 )
-	{	
-		uart_putchar( JAG_UART, 'a' );
-		uart_putchar( CPU_UART, 'b' );
+	jaguar_motor_config( 1, ENCODER_PPR, 141 );
 
-		for( i=0; i<DELAY; i++);
+	jaguar_control_mode_enable( SPEED_CONTROL, 1, 1 );
+	jaguar_control_mode_setPID( SPEED_CONTROL, 1, P, I, D );
+	jaguar_control_mode_reference( SPEED_CONTROL, 1, QUAD_ENCODER );
+
+	jaguar_control_mode_set( SPEED_CONTROL, 1, 60<<16 );
+
+	while( 1 )
+	{
+		char c;
+		c = uart_getchar( CPU_UART ) - '0';
+
+		if( c >= 0 && c <= 9 )
+		{
+			jaguar_voltage_control_set( 1, ((32768 * c) / 9));
+		}
+		else
+		{
+			jaguar_voltage_control_set( 1, 0 );
+		}
 	}
-	
 
 	return 0;
 }

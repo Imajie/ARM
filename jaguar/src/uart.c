@@ -80,17 +80,31 @@ void uart_init( int idx, int baud )
 	
 	// default setup is for 8N1
 	
-	// Enable tx and rx interrupts
+	// Enable rx interrupts
 #define OR_C2(x,y)	(x) == 0 ? UART0_C2 |= y : \
 					(x) == 1 ? UART1_C2 |= y : \
 					(x) == 2 ? UART2_C2 |= y : 0
 #define NAND_C2(x,y)	(x) == 0 ? UART0_C2 &= ~(y) : \
 						(x) == 1 ? UART1_C2 &= ~(y) : \
 						(x) == 2 ? UART2_C2 &= ~(y) : 0
-	OR_C2(idx, UART_C2_TIE_MASK | UART_C2_RIE_MASK);
+#define OR_C3(x,y)	(x) == 0 ? UART0_C3 |= y : \
+					(x) == 1 ? UART1_C3 |= y : \
+					(x) == 2 ? UART2_C3 |= y : 0
+#define OR_S2(x,y)	(x) == 0 ? UART0_S2 |= y : \
+					(x) == 1 ? UART1_S2 |= y : \
+					(x) == 2 ? UART2_S2 |= y : 0
+	OR_C2(idx, UART_C2_RIE_MASK);
+	//OR_C2(idx, UART_C2_TIE_MASK);
 
-	// Enable tx and rx on uart
-	OR_C2(idx, UART_C2_TE_MASK | UART_C2_RE_MASK);
+	if( idx == JAG_UART )
+	{
+		//OR_S2( idx, UART_S2_RXINV_MASK ); // inverted by hardware
+		OR_C3( idx, UART_C3_TXINV_MASK );
+	}
+
+	// Enable rx on uart
+	OR_C2(idx, UART_C2_RE_MASK);
+	OR_C2(idx, UART_C2_TE_MASK);
 
 	// enable interrupts
 #define INT_UART(x)	(x) == 0 ? INT_UART0 : \
@@ -131,16 +145,18 @@ void uart_putchar( int id, const char c )
 	if( id >= 0 && id < N_UART )
 	{
 		// sending things, so wait for space to write the char
-		if( id == 1 ) GPIOB_PCOR |= 1<<19;
 		while( c_buffer_write( &uart_c_buf_tx[id], c ) != 0 );
-		if( id == 1 ) GPIOB_PSOR |= 1<<19;
 
 		// is the TX idle
-#define S1(x)	(x) == 0 ? UART0_S1 : \
-				(x) == 1 ? UART1_S1 : \
-				(x) == 2 ? UART2_S1 : 0
+#define S1(x)		(x) == 0 ? UART0_S1 : \
+					(x) == 1 ? UART1_S1 : \
+					(x) == 2 ? UART2_S1 : 0
+#define OR_S1(x,y)	(x) == 0 ? UART0_S1 |= (y) : \
+					(x) == 1 ? UART1_S1 |= (y) : \
+					(x) == 2 ? UART2_S1 |= (y) : 0
 		if( S1(id) & UART_S1_TC_MASK )
 		{
+			//OR_C2(id, UART_C2_TE_MASK);
 			OR_C2(id, UART_C2_TIE_MASK);
 		}
 	}
@@ -153,7 +169,9 @@ void uart_putstr( int idx, const char *s )
 	if( idx >= 0 && idx < N_UART )
 	{
 		while( *ptr != '\0' )
+		{
 			uart_putchar( idx, *ptr++ );
+		}
 	}
 }
 
@@ -190,18 +208,36 @@ void UART_isr( int idx )
 						(x) == 1 ? UART1_D = y : \
 						(x) == 2 ? UART2_D = y : 0
 	// check what this interrupt is for	
+	char stat = S1(idx);
 	
+	// Errors
+	if( stat & (UART_S1_NF_MASK | UART_S1_OR_MASK | UART_S1_FE_MASK | UART_S1_PF_MASK) )
+	{
+		// clear flags
+		OR_S1(idx, (UART_S1_NF_MASK | UART_S1_OR_MASK | UART_S1_FE_MASK | UART_S1_PF_MASK) );
+
+		// don't save bad data
+		GET_DATA(idx);
+		stat &= ~(UART_S1_RDRF_MASK);
+	}
+
 	// RX
-	if( S1(idx) & UART_S1_RDRF_MASK )
+	if( stat & UART_S1_RDRF_MASK )
 	{
 		char c = GET_DATA(idx);
 
 		// we have a new byte, drop if no space
 		c_buffer_write( &uart_c_buf_rx[idx], c );
+
+		if( idx == CPU_UART )
+		{
+			c_buffer_write( &uart_c_buf_tx[idx], c );
+			OR_C2(idx, UART_C2_TIE_MASK);
+		}
 	}
 	
 	// TX
-	if( S1(idx) & UART_S1_TDRE_MASK )
+	if( stat & UART_S1_TDRE_MASK )
 	{
 		// do we have a new byte to send?
 		char c;
@@ -213,6 +249,7 @@ void UART_isr( int idx )
 		else
 		{
 			// No, so disable the TX interrupt
+			//NAND_C2(idx, UART_C2_TE_MASK);
 			NAND_C2(idx, UART_C2_TIE_MASK);
 		}
 	}
@@ -228,9 +265,7 @@ void UART0_isr(void)
 
 void UART1_isr(void)
 {
-	GPIOB_PCOR |= 1<<19;
 	UART_isr(1);
-	GPIOB_PCOR |= 1<<19;
 }
 
 void UART2_isr(void)

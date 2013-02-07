@@ -64,6 +64,18 @@ program: all
 
 # DO NOT DELETE
 
+src/jaguar.o: /usr/include/stdlib.h /usr/include/features.h
+src/jaguar.o: /usr/include/stdc-predef.h /usr/include/sys/cdefs.h
+src/jaguar.o: /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h
+src/jaguar.o: /usr/include/bits/waitflags.h /usr/include/bits/waitstatus.h
+src/jaguar.o: /usr/include/endian.h /usr/include/bits/endian.h
+src/jaguar.o: /usr/include/bits/byteswap.h /usr/include/bits/types.h
+src/jaguar.o: /usr/include/bits/typesizes.h /usr/include/bits/byteswap-16.h
+src/jaguar.o: /usr/include/sys/types.h /usr/include/time.h
+src/jaguar.o: /usr/include/sys/select.h /usr/include/bits/select.h
+src/jaguar.o: /usr/include/bits/sigset.h /usr/include/bits/time.h
+src/jaguar.o: /usr/include/sys/sysmacros.h /usr/include/alloca.h
+src/jaguar.o: /usr/include/bits/stdlib-float.h
 startup/low_level_init.o: /usr/include/stdint.h /usr/include/features.h
 startup/low_level_init.o: /usr/include/stdc-predef.h /usr/include/sys/cdefs.h
 startup/low_level_init.o: /usr/include/bits/wordsize.h

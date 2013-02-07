@@ -10,7 +10,7 @@
 
 ISR(default_isr)
 {
-	GPIOB_PCOR |= (1<<19);
+	//GPIOB_PCOR |= (1<<19);
 	return;
 }
 

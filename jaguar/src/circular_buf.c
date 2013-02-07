@@ -5,6 +5,7 @@
  * Implementation of a circular buffer
  */
 #include "circular_buf.h"
+#include "common.h"
 
 /*
  * c_buffer_init
@@ -37,7 +38,10 @@ c_buffer_t c_buffer_init( char *buffer, size_t buffer_size )
  */
 int c_buffer_write( c_buffer_t *buf, char c )
 {
-	if( buf->size == buf->buf_size )
+	//if( c == 0 )
+	//	GPIOB_PCOR |= 1 << 18;
+
+	if( buf->size >= buf->buf_size )
 	{
 		return -1;
 	}
@@ -63,7 +67,7 @@ int c_buffer_write( c_buffer_t *buf, char c )
  */
 int c_buffer_read( c_buffer_t *buf, char *c )
 {
-	if( buf->size == 0 )
+	if( buf->size <= 0 )
 	{
 		return -1;
 	}
